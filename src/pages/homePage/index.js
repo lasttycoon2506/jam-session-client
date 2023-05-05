@@ -1,4 +1,12 @@
+import WidgetWrapper from "../../components/WidgetWrapper";
+
 const HomePage = () => {
-    return (<div>Homepage</div>)
-}
+  return (
+    <>
+      <WidgetWrapper>
+        <div>Homepage</div>
+      </WidgetWrapper>
+    </>
+  );
+};
 export default HomePage;

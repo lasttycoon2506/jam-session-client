@@ -1,4 +1,6 @@
+import WidgetWrapper from "../../components/WidgetWrapper";
+
 const ProfilePage = () => {
-    return (<div>Profile Page</div>)
-}
+  return <WidgetWrapper>Profile Page</WidgetWrapper>;
+};
 export default ProfilePage;

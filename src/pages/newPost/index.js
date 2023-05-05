@@ -1,10 +1,10 @@
 import WidgetWrapper from "../../components/WidgetWrapper";
 
-const LoginPage = () => {
+const NewPostPage = () => {
   return (
     <WidgetWrapper>
-      <div>Login Page</div>
+      <div>New Post Page</div>
     </WidgetWrapper>
   );
 };
-export default LoginPage;
+export default NewPostPage;
