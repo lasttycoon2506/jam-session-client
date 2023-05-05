@@ -12,7 +12,7 @@ const WidgetWrapper = ({ children }) => {
         sx={{
           p: 2,
           backgroundColor: theme.palette.primary.light,
-          boxShadow: `1px 1px 5px ${theme.palette.neutral.dark},-1px -1px 5px ${theme.palette.neutral.main}`,
+          boxShadow: `3px 3px 5px ${theme.palette.neutral.dark},-3px -3px 5px ${theme.palette.neutral.dark}`,
         }}
       >
         {children}

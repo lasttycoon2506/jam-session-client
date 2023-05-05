@@ -1,17 +1,14 @@
-// taken from: https://digitalsynopsis.com/wp-content/uploads/2016/01/minimal-web-color-palettes-combination-hex-code-1.png
-
 export const themeSettings = () => {
   return {
     palette: {
       primary: {
-        light: "#F8B195",
-        main: "#F67290",
-        dark: "#C06C84",
-        redblue: "#6C5B7b",
-        blue: "#355C7D",
+        light: "#CBE4DE",
+        main: "#0E8388",
+        medium: "2E4F4F",
+        dark: "#2C3333",
       },
       neutral: {
-        dark: "#212529",
+        dark: "#1e1e1e",
         main: "#343a40",
         medium: "#495057",
         light: "#6c757d",
