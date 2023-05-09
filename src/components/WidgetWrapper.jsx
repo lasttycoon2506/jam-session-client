@@ -11,7 +11,7 @@ const WidgetWrapper = ({ children }) => {
         elevation={3}
         sx={{
           p: 2,
-          backgroundColor: theme.palette.primary.light,
+          backgroundColor: theme.palette.neutral.light,
           boxShadow: `3px 3px 5px ${theme.palette.neutral.dark},-3px -3px 5px ${theme.palette.neutral.dark}`,
         }}
       >

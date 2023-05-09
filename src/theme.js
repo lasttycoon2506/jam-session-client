@@ -11,7 +11,7 @@ export const themeSettings = () => {
         dark: "#1e1e1e",
         main: "#343a40",
         medium: "#495057",
-        light: "#6c757d",
+        light: "#F0EBE3",
       },
     },
   };
