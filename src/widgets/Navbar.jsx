@@ -52,6 +52,7 @@ const Navbar = () => {
           </IconButton>
           <Typography
             variant="h4"
+            color={dark}
             onClick={() => navigate("/home")}
             sx={{
               "&:hover": {
