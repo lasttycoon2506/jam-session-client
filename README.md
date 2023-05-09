@@ -5,8 +5,9 @@
 Install Jam Session Server with npm
 
 ```bash
-  npm install jam-session-server
-  cd jam-session-server
-  npm start
+  git clone https://github.com/Jaron-S/jam-session-client 
+  cd jam-session-client
+  npm install
+  node start
 ```
     
