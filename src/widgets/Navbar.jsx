@@ -15,6 +15,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Logout from "@mui/icons-material/Logout";
+import { AddCircleOutline } from "@mui/icons-material";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -68,7 +69,6 @@ const Navbar = () => {
         <List>
           <ListItem
             key="profile"
-            to="/profile"
             onClick={() => {
               navigate(`/profile/${userId}`);
               toggleDrawer();
@@ -83,6 +83,23 @@ const Navbar = () => {
               <AccountCircleIcon />
             </ListItemIcon>
             <ListItemText primary="My Profile" />
+          </ListItem>
+          <ListItem
+            key="newpost"
+            onClick={() => {
+              navigate(`/newpost`);
+              toggleDrawer();
+            }}
+            sx={{
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            <ListItemIcon>
+              <AddCircleOutline />
+            </ListItemIcon>
+            <ListItemText primary="New Post" />
           </ListItem>
           <ListItem
             key="logout"
