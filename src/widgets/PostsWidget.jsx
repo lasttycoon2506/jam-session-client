@@ -1,8 +1,14 @@
+import { useDispatch, useSelector } from "react-redux";
 import PostWidget from "./PostWidget";
+import { useEffect } from "react";
+import { setPosts } from "../state";
 
 const PostsWidget = () => {
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts);
+
   // Temporary
-  const posts = [
+  const tempPosts = [
     {
       _id: "1234",
       userId: "1234",
@@ -74,6 +80,14 @@ const PostsWidget = () => {
       imagePaths: ["image5.jpg"],
     },
   ];
+
+  const getPosts = () => {
+    dispatch(setPosts({ posts: tempPosts }));
+  };
+
+  useEffect(() => {
+    getPosts(); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>

@@ -6,7 +6,7 @@ import { useTheme } from "@mui/material";
 const WidgetWrapper = ({ children }) => {
   const theme = useTheme();
   return (
-    <Box sx={{ justifyContent: "center", m: "2rem" }}>
+    <Box sx={{ display: "flex", justifyContent: "center", m: "2rem" }}>
       <Paper
         elevation={3}
         sx={{

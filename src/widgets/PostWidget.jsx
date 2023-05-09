@@ -4,8 +4,8 @@ import { Divider, Typography } from "@mui/material";
 import WidgetWrapper from "../components/WidgetWrapper";
 
 const PostWidget = ({ post }) => {
-  return (
-    <WidgetWrapper sx={{ mx: "2rem", width: "300px", height: "200px" }}>
+  return post ? (
+    <WidgetWrapper>
       <Typography gutterBottom variant="h5" component="div">
         {post.title}
       </Typography>
@@ -15,6 +15,8 @@ const PostWidget = ({ post }) => {
         <Link to={`/profile/${post.userId}`}>Profile</Link>
       </Typography>
     </WidgetWrapper>
+  ) : (
+    <></>
   );
 };
 
