@@ -1,11 +1,11 @@
 import Navbar from "../../widgets/Navbar";
-import PostsWidget from "../../widgets/PostsWidget";
+import Newsfeed from "../../widgets/Newsfeed";
 
 const HomePage = () => {
   return (
     <div>
       <Navbar />
-      <PostsWidget />
+      <Newsfeed />
     </div>
   );
 };

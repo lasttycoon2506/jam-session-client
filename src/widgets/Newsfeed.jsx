@@ -3,7 +3,7 @@ import PostWidget from "./PostWidget";
 import { useEffect } from "react";
 import { setPosts } from "../state";
 
-const PostsWidget = () => {
+const Newsfeed = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
 
@@ -100,4 +100,4 @@ const PostsWidget = () => {
   );
 };
 
-export default PostsWidget;
+export default Newsfeed;
