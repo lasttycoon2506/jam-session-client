@@ -1,6 +1,12 @@
 import WidgetWrapper from "../../components/WidgetWrapper";
+import Navbar from "../../widgets/Navbar";
 
 const ProfilePage = () => {
-  return <WidgetWrapper>Profile Page</WidgetWrapper>;
+  return (
+    <>
+      <Navbar />
+      <WidgetWrapper>Profile Page</WidgetWrapper>
+    </>
+  );
 };
 export default ProfilePage;
