@@ -25,6 +25,7 @@ const PostWidget = ({ post }) => {
         <Typography color="textSecondary" variant="h6">
           {post.instrument} player with {post.experience} experience
         </Typography>
+        <Divider />
         <Typography color="textSecondary">
           Genres: {post.genres.join(", ")}
         </Typography>
