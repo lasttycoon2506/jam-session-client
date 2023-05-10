@@ -24,7 +24,7 @@ const Navbar = () => {
   const dark = theme.palette.primary.dark;
   const medium = theme.palette.primary.medium;
   const shadow = theme.palette.neutral.dark;
-  const userId = "1"; // temporary
+  const userId = "24"; // temporary
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -39,7 +39,7 @@ const Navbar = () => {
         sx={{
           backgroundColor: light,
           color: dark,
-          boxShadow: `3px 3px 5px ${shadow},-3px -3px 5px ${shadow}`,
+          boxShadow: `1px 1px 5px ${shadow},-1px -1px 5px ${shadow}`,
         }}
       >
         <Toolbar>
