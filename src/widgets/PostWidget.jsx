@@ -42,7 +42,7 @@ const PostWidget = ({ post }) => {
         {post.imagePaths && post.imagePaths.length > 0 && (
           <div>
             {post.imagePaths.map((image, index) => (
-              <img src={image} alt={`image: ${index}`} key={index} />
+              <img src={image} alt={image} key={index} />
             ))}
           </div>
         )}
