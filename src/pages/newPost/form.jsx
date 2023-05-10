@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import WidgetWrapper from "../../components/WidgetWrapper";
 import { useSelector } from "react-redux";
+import Autocomplete from "@mui/material/Autocomplete";
 
 const initialFormData = {
   userId: "",
@@ -32,9 +33,13 @@ const Form = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+    let newValue = value;
+    if (name === "genres") {
+      newValue = Array.isArray(value) ? value.join(", ") : value;
+    }
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: newValue,
     });
   };
 
@@ -104,13 +109,23 @@ const Form = () => {
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Instrument"
-              name="instrument"
-              value={formData.instrument}
-              onChange={handleInputChange}
-            />
+            <FormControl fullWidth>
+              <InputLabel>Instrument</InputLabel>
+              <Select
+                name="instrument"
+                value={formData.instrument}
+                onChange={handleInputChange}
+                required
+              >
+                <MenuItem value="">--Please choose an option--</MenuItem>
+                <MenuItem value="guitar">Guitar</MenuItem>
+                <MenuItem value="bass">Bass</MenuItem>
+                <MenuItem value="drums">Drums</MenuItem>
+                <MenuItem value="piano">Piano</MenuItem>
+                <MenuItem value="vocals">Vocals</MenuItem>
+                <MenuItem value="other">Other</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -122,14 +137,34 @@ const Form = () => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
+            <Autocomplete
+              multiple
               fullWidth
-              label="Genres"
-              name="genres"
-              value={formData.genres}
-              onChange={handleInputChange}
+              options={[
+                "Rock",
+                "Pop",
+                "Hip hop",
+                "Electronic",
+                "Jazz",
+                "Blues",
+                "Country",
+                "Folk",
+                "Classical",
+                "World",
+                "Other",
+              ]}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Genres"
+                  name="genres"
+                  value={formData.genres}
+                  onChange={handleInputChange}
+                />
+              )}
             />
           </Grid>
+
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
