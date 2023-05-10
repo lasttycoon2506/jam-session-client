@@ -21,7 +21,7 @@ function App() {
             <Route path="/" element={<LoginPage />}></Route>
             <Route path="/home" element={<HomePage />}></Route>
             <Route path="/profile/:userId" element={<ProfilePage />}></Route>
-            <Route path="/newpost" element={<NewPostPage />}></Route>
+            <Route path="/create" element={<NewPostPage />}></Route>
           </Routes>
         </ThemeProvider>
       </BrowserRouter>

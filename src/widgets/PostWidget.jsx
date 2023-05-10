@@ -1,21 +1,50 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Divider, Typography } from "@mui/material";
 import WidgetWrapper from "../components/WidgetWrapper";
 import { Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const PostWidget = ({ post }) => {
+  const navigate = useNavigate();
   return post ? (
     <WidgetWrapper>
-      <Box maxWidth="50rem">
-        <Typography gutterBottom variant="h5" component="div">
-          {post.title}
+      <Box
+        maxWidth="40rem"
+        onClick={() => {
+          navigate(`/profile/${post.userId}`);
+        }}
+        sx={{
+          "&:hover": {
+            cursor: "pointer",
+          },
+        }}
+      >
+        <Typography variant="h5" component="h2">
+          {post.type === "offering" ? "Musician Offering:" : "Musician Wanted:"}
+        </Typography>
+        <Typography color="textSecondary" variant="h6">
+          {post.instrument} player with {post.experience} experience
+        </Typography>
+        <Typography color="textSecondary">
+          Genres: {post.genres.join(", ")}
+        </Typography>
+        <Typography color="textSecondary">
+          Availability: {post.availability}
+        </Typography>
+        <Typography color="textSecondary">
+          Recording Experience: {post.recordingExperience}
         </Typography>
         <Divider />
-        <Typography color="text.secondary">{post.description}</Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
-          <Link to={`/profile/${post.userId}`}>Profile</Link>
+        <Typography variant="body2" component="p">
+          {post.description}
         </Typography>
+        {post.imagePaths && post.imagePaths.length > 0 && (
+          <div>
+            {post.imagePaths.map((image, index) => (
+              <img src={image} alt={`image: ${index}`} key={index} />
+            ))}
+          </div>
+        )}
       </Box>
     </WidgetWrapper>
   ) : (

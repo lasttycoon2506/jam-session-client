@@ -1,13 +1,11 @@
-import WidgetWrapper from "../../components/WidgetWrapper";
 import Navbar from "../../widgets/Navbar";
+import Form from "./form";
 
 const NewPostPage = () => {
   return (
     <>
       <Navbar />
-      <WidgetWrapper>
-        <div>New Post Page</div>
-      </WidgetWrapper>
+      <Form />
     </>
   );
 };

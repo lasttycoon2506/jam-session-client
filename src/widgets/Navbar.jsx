@@ -22,6 +22,7 @@ const Navbar = () => {
   const theme = useTheme();
   const light = theme.palette.neutral.light;
   const dark = theme.palette.primary.dark;
+  const medium = theme.palette.primary.medium;
   const shadow = theme.palette.neutral.dark;
   const userId = "1"; // temporary
 
@@ -53,7 +54,7 @@ const Navbar = () => {
           </IconButton>
           <Typography
             variant="h4"
-            color={dark}
+            color={medium}
             onClick={() => navigate("/home")}
             sx={{
               "&:hover": {
@@ -87,7 +88,7 @@ const Navbar = () => {
           <ListItem
             key="newpost"
             onClick={() => {
-              navigate(`/newpost`);
+              navigate(`/create`);
               toggleDrawer();
             }}
             sx={{

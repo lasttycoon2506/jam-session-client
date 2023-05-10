@@ -7,7 +7,7 @@ const Newsfeed = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
 
-  // Temporary
+  // Remove me
   const tempPosts = [
     {
       _id: "1234",
@@ -40,7 +40,7 @@ const Newsfeed = () => {
     {
       _id: "9012",
       userId: "9012",
-      type: "offering",
+      type: "wanted",
       title: "Example Title 3",
       instrument: "Bass",
       experience: "5 Years",
@@ -54,7 +54,7 @@ const Newsfeed = () => {
     {
       _id: "4567",
       userId: "4567",
-      type: "offering",
+      type: "wanted",
       title: "Example Title 4",
       instrument: "Drums",
       experience: "8 Years",
@@ -81,7 +81,10 @@ const Newsfeed = () => {
     },
   ];
 
-  const getPosts = () => {
+  const getPosts = async () => {
+    const data = fetch("https://jam-session.onrender.com/posts")
+      .then((response) => response.json())
+      .catch((error) => console.error(error));
     dispatch(setPosts({ posts: tempPosts }));
   };
 
@@ -91,11 +94,9 @@ const Newsfeed = () => {
 
   return (
     <div>
-      <PostWidget post={posts[0]} />
-      <PostWidget post={posts[1]} />
-      <PostWidget post={posts[2]} />
-      <PostWidget post={posts[3]} />
-      <PostWidget post={posts[4]} />
+      {posts.map((post) => (
+        <PostWidget key={post._id} post={post} />
+      ))}
     </div>
   );
 };
