@@ -82,10 +82,10 @@ const Newsfeed = () => {
   ];
 
   const getPosts = async () => {
-    const data = fetch("https://jam-session.onrender.com/posts")
+    fetch("https://jam-session.onrender.com/posts")
       .then((response) => response.json())
+      .then((data) => dispatch(setPosts({ posts: data })))
       .catch((error) => console.error(error));
-    dispatch(setPosts({ posts: tempPosts }));
   };
 
   useEffect(() => {
