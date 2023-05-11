@@ -1,15 +1,17 @@
 import React from "react";
-import { Divider, Typography } from "@mui/material";
+import { Divider, Typography, useMediaQuery } from "@mui/material";
 import WidgetWrapper from "../components/WidgetWrapper";
 import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const PostWidget = ({ post }) => {
+  const isMobileScreen = useMediaQuery("(max-width: 600px)");
   const navigate = useNavigate();
   return post ? (
     <WidgetWrapper>
       <Box
-        maxWidth="40rem"
+        maxWidth={isMobileScreen ? "19rem" : "32rem"}
+        minWidth={isMobileScreen ? null : "32rem"}
         onClick={() => {
           navigate(`/profile/${post.userId}`);
         }}
