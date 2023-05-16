@@ -10,9 +10,9 @@ const Newsfeed = () => {
   // Send a request to the server for the posts and store in state
   const getPosts = async () => {
     fetch("https://jam-session.onrender.com/posts")
-      .then((response) => response.json()) // 1. parse data
-      .then((data) => dispatch(setPosts({ posts: data }))) // 2. store data in state
-      .catch((error) => console.error(error)); // 3. error logging
+      .then((response) => response.json())                  // 1. parse data
+      .then((data) => dispatch(setPosts({ posts: data })))  // 2. store data in state
+      .catch((error) => console.error(error));              // 3. error logging
   };
 
   // Run getPosts on page load
