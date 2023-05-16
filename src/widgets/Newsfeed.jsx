@@ -18,7 +18,7 @@ const Newsfeed = () => {
   // Run getPosts on page load
   useEffect(() => {
     getPosts(); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // ^ this just disables an unecessary linting error
+  }, []);       // ^ this just disables an unecessary linting error
 
   return (
     <div>
