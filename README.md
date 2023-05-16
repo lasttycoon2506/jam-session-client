@@ -2,7 +2,7 @@
 
 ## Installation
 
-Install Jam Session Server with npm
+Install Jam Session Client with npm
 
 ```bash
   git clone https://github.com/Jaron-S/jam-session-client 
