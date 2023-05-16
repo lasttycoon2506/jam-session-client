@@ -8,6 +8,6 @@ Install Jam Session Client with npm
   git clone https://github.com/Jaron-S/jam-session-client 
   cd jam-session-client
   npm install
-  node start
+  npm start
 ```
     
