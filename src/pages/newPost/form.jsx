@@ -24,12 +24,17 @@ const initialFormData = {
   availability: "",
   recordingExperience: "",
   description: "",
-  imagePaths: [],
+  images: [],
 };
 
 const Form = () => {
   const userId = useSelector((state) => state.user._id);
+  const tempUserId = "64664dc135ead82c97713735";
   const [formData, setFormData] = useState(initialFormData);
+  const localUrl = `http://localhost:3001/posts/${tempUserId}`;
+  const url =
+    "https://corsproxy.io/?" +
+    encodeURIComponent(`https://jam-session.onrender.com/posts/${tempUserId}`);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -45,22 +50,24 @@ const Form = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const form = new FormData();
-    form.append("userId", userId);
-    form.append("type", formData.type);
-    form.append("instrument", formData.instrument);
-    form.append("experience", formData.experience);
-    form.append("genres", formData.genres);
-    form.append("availability", formData.availability);
-    form.append("recordingExperience", formData.recordingExperience);
-    form.append("description", formData.description);
-    formData.images.forEach((image) => {
-      form.append("images", image);
-    });
+    const form = {
+      type: formData.type,
+      instrument: formData.instrument,
+      experience: formData.experience,
+      genres: formData.genres,
+      availability: formData.availability,
+      recordingExperience: formData.recordingExperience,
+      description: formData.description,
+      images: formData.images,
+    };
     try {
-      const response = await fetch("http://jam-session.onrender.com/posts", {
+      console.log(form);
+      const response = await fetch(url, {
         method: "POST",
-        body: form,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
       });
       const data = await response.json();
       console.log(data);
@@ -79,7 +86,7 @@ const Form = () => {
         imagesArray.push(reader.result);
         setFormData({
           ...formData,
-          imagePaths: imagesArray,
+          images: imagesArray,
         });
       };
     }
