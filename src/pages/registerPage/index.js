@@ -1,109 +1,72 @@
 import WidgetWrapper from "../../components/WidgetWrapper";
 import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { LineAxisOutlined } from "@mui/icons-material";
 // import { isEmail } from "validator";
 
-// const API_URL = "https://jam-session.onrender.com/auth/register"
-const API_URL = "http://localhost:3001/auth/register"
-// const API_URL = "mongodb+srv://Capstone:JamSession@cluster0.g0pkoy8.mongodb.net/?retryWrites=true&w=majority"
-// const API_URL = "JamSession@cluster0.g0pkoy8.mongodb.net/?retryWrites=true&w=majority"
+const initialRegisterData = {
+  name: "",
+  email: "",
+  password: "",
+  location: "",
+  experience: "",
+  genres: "",
+  availability: "",
+  instruments: "",
+};
 
 const RegisterPage = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [location, setLocation] = useState("");
-  const [experience, setExperience] = useState("");
-  const [genres, setGenres] = useState("");
-  const [availability, setAvailability] = useState("");
-  const [instruments, setInstruments] = useState("");
-  const [registration, setRegistration] = useState("setRegistration");
-  const [successful, setSuccessful] = useState(false);
-
   const dispatch = useDispatch();
-  const postId = useSelector((state) => state.register)
+  const [formData, setFormData] = useState(initialRegisterData);
+  const API_URL = "https://jam-session.onrender.com/auth/register"; // might be some issue here with cors
 
-  const register = async (name, email, password, location, experience, genres, availability, instruments) => {
-    const requestOptions = {
-      mode: 'no-cors',
-      method: 'POST',
-      headers: { 'Content-Type': 'applicatoin/json' },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password,
-        location: location,
-        experience: experience,
-        genres: genres,
-        availability: availability,
-        instruments: instruments
-      })
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    let newValue = value;
+    setFormData({
+      ...formData,
+      [name]: newValue,
+    });
+  };
+
+  //TODO: Validation that user has input required fields - also add * for required fields
+
+  //TODO: build instrument json object
+
+  const register = async (event) => {
+    event.preventDefault();
+    const newUser = {
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+      location: formData.location,
+      bandExperience: formData.bandExperience,
+      genres: formData.genres,
+      availability: formData.availability,
+      instruments: formData.instruments,
     };
-    fetch(API_URL, requestOptions)
-      .then((response) => response.json())
-      .then((data) => dispatch(setRegistration({ postId: data.id })))
-      .catch((error) => console.error(error));
-  };
 
-
-
-  const handleRegister = (e) => {
-    e.preventDefault();
-    setSuccessful(false);
-    console.log(name);
-    // form.current.validateAll();
-
-    // if(chechBtn.current.context._errors.length === 0){
-    //   dispatch(register(name, email, password, location, experience, genres, availability, instruments))
-    //   .then(() => {
-    //     setSuccessful(true);
-    //   })
-    //   .catch(()=> {
-    //     setSuccessful(false);
-    //   });
-    // }
-    dispatch(register(name, email, password, location, experience, genres, availability, instruments))
-      .then(() => {
-        setSuccessful(true);
-      })
-      .catch(()=> {
-        setSuccessful(false);
+    try {
+      console.log(newUser);
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUser),
       });
+
+      if (!response.ok) {
+        throw new Error(`POST request failed with status ${response.status}`);
+      }
+      const responseData = await response.json();
+      console.log("POST request successful");
+      console.log(responseData);
+      
+    } catch (error) {
+      console.error("Error with POST request:", error);
+    }
   };
 
-  const onChangeName = (e) => {
-    const name = e.target.value;
-    setName(name);
-  }
-  const onChangeEmail = (e) => {
-    const email = e.target.value;
-    setName(email);
-  }
-  const onChangePassword = (e) => {
-    const password = e.target.value;
-    setName(password);
-  }
-  const onChangeLocation = (e) => {
-    const location = e.target.value;
-    setName(location);
-  }
-  const onChangeExperience = (e) => {
-    const experience = e.target.value;
-    setName(experience);
-  }
-  const onChangeGenres = (e) => {
-    const genres = e.target.value;
-    setName(genres);
-  }
-  const onChangeAvailability = (e) => {
-    const availability = e.target.value;
-    setName(availability);
-  }
-  const onChangeInstruments = (e) => {
-    const instruments = e.target.value;
-    setName(instruments);
-  }
 
   return (
     <div>
@@ -116,42 +79,53 @@ const RegisterPage = () => {
               type="text"
               name="name"
               placeholder="Rodrigo00"
-              value={name}
-              onChange={onChangeName}
+              value={formData.name}
+              onChange={handleInputChange}
             ></input>
           </div>
 
           <div>
             <label htmlFor="">Email</label>
-            <input 
-            type="text" 
-            placeholder="email@jam.sesh"
-            name="email"
+            <input
+              type="text"
+              placeholder="email@jam.sesh"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
             ></input>
           </div>
 
           <div>
             <label htmlFor="">Password</label>
-            <input 
-            type="text" 
-            name="password"
-            placeholder="8-16 Characters"></input>
+            <input
+              type="text"
+              name="password"
+              placeholder="8-16 Characters"
+              value={formData.password}
+              onChange={handleInputChange}
+            ></input>
           </div>
 
           <div>
             <label htmlFor="">Location</label>
-            <input 
-            type="text" 
-            name="location"
-            placeholder="Los Angeles, Ca"></input>
+            <input
+              type="text"
+              name="location"
+              placeholder="Los Angeles, Ca"
+              value={formData.location}
+              onChange={handleInputChange}
+            ></input>
           </div>
 
           <div>
             <label htmlFor="">Band Experience</label>
-            <input 
-            type="text" 
-            name="bandExperience"
-            placeholder="3 Years"></input>
+            <input
+              type="text"
+              name="bandExperience"
+              placeholder="3 Years"
+              value={formData.bandExperience}
+              onChange={handleInputChange}
+            ></input>
           </div>
 
           <div>
@@ -159,16 +133,21 @@ const RegisterPage = () => {
             <input
               type="text"
               name="genres"
-              placeholder="Heavy Metal, Blues, RnB, Slowcore, City Pop"
+              placeholder="Heavy Metal, Slowcore, City Pop"
+              value={formData.type}
+              onChange={handleInputChange}
             ></input>
           </div>
 
           <div>
             <label htmlFor="Availability ">Availability</label>
-            <input 
-            type="text" 
-            name="availability"
-            placeholder="M-F 3Pm"></input>
+            <input
+              type="text"
+              name="availability"
+              placeholder="M-F 3Pm"
+              value={formData.type}
+              onChange={handleInputChange}
+            ></input>
           </div>
 
           <div>
@@ -179,7 +158,13 @@ const RegisterPage = () => {
             </div>
             <div>
               <label htmlFor="">Years of Experice</label>
-              <select name="yearsExperience" type="text" placeholder="">
+              <select
+                name="yearsExperience"
+                type="text"
+                placeholder="0"
+                value={formData.type}
+                onChange={handleInputChange}
+              >
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -195,7 +180,13 @@ const RegisterPage = () => {
             </div>
             <div>
               <label htmlFor="">Proficiency</label>
-              <select name="proficiency" type="text" placeholder="">
+              <select
+                name="proficiency"
+                type="text"
+                placeholder=""
+                value={formData.type}
+                onChange={handleInputChange}
+              >
                 <option value="Novice">Novice</option>
                 <option value="Intermediate">Intermediate</option>
                 <option value="Advanced">Advanced</option>
@@ -203,7 +194,9 @@ const RegisterPage = () => {
               </select>
             </div>
           </div>
-          <button className="mt-3" onClick={handleRegister}>Lets Jam!</button>
+          <button className="mt-3" onClick={register}>
+            Lets Jam!
+          </button>
         </div>
       </WidgetWrapper>
     </div>
