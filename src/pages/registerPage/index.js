@@ -68,7 +68,7 @@ const RegisterPage = () => {
       const responseData = await response.json();
       console.log("POST request successful");
       console.log(responseData);
-      window.location = `/login`;
+      window.location = `/`;
     } catch (error) {
       console.error("Error with POST request:", error);
     }
