@@ -1,0 +1,95 @@
+import WidgetWrapper from "../../components/WidgetWrapper";
+import React, { useState } from "react";
+import {
+    TextField,
+    Button,
+    Grid,
+    Typography,
+    Divider,
+  } from "@mui/material";
+
+const initialLoginData = {
+  email: "",
+  password: "",
+};
+
+const Form = () => {
+  const [formData, setFormData] = useState(initialLoginData);
+  const API_URL = "https://jam-session.onrender.com/auth/login"; 
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    let newValue = value;
+    setFormData({
+      ...formData,
+      [name]: newValue,
+    });
+  };
+
+  const loginAttempt = async (event) => {
+    event.preventDefault();
+    const login = {
+      email: formData.email,
+      password: formData.password,
+    };
+    try {
+      console.log(login);
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(login),
+      });
+      if (!response.ok) {
+        throw new Error(`POST request failed with status ${response.status}`);
+      }
+      const responseData = await response.json();
+      console.log(responseData.user);
+      // alert("Loggin you in, just a moment!");
+      window.location = `/users/${responseData.user._id}`;
+    } catch (error) {
+      console.error("Error with POST request:", error);
+      alert("Failed to log in\nPlease check that your credentials are correct and try again.");
+      window.location = '/';
+    }
+  };
+
+  return (
+    <WidgetWrapper>
+      <Typography variant="h5" align="center" mb={1}>
+        Login
+      </Typography>
+      <Divider />
+      <form onSubmit={loginAttempt}>
+        <Grid container spacing={3} mt={1}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button type="submit" variant="contained" color="primary">
+              Submit
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+    </WidgetWrapper>
+  );
+};
+
+export default Form;
