@@ -46,11 +46,11 @@ const Form = () => {
       }
       const responseData = await response.json();
       console.log(responseData.user);
-      // alert("Loggin you in, just a moment!");
-      window.location = `/users/${responseData.user._id}`;
+      window.alert("Logging in...")
+      window.location = '/home';
     } catch (error) {
       console.error("Error with POST request:", error);
-      alert("Failed to log in\nPlease check that your credentials are correct and try again.");
+      alert("Incorrect Login Information");
       window.location = '/';
     }
   };
@@ -68,6 +68,7 @@ const Form = () => {
               fullWidth
               label="Email"
               name="email"
+              type="email"
               value={formData.email}
               onChange={handleInputChange}
             />
@@ -77,6 +78,7 @@ const Form = () => {
               fullWidth
               label="Password"
               name="password"
+              type="password"
               value={formData.password}
               onChange={handleInputChange}
             />
