@@ -11,7 +11,8 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
 
 
-    const loginAttempt = async () => {
+    const loginAttempt = async (event) => {
+        event.preventDefault();
         const login = {email, password};
         const response = await fetch("https://jam-session.onrender.com/auth/login", {
             method: 'POST',
@@ -22,10 +23,15 @@ const LoginPage = () => {
         })
         const data = await response.json();
         console.log(data)
+        // setTimeout(5000);     
         if (response.status === 200) {
-            alert('Successfully logged in');
+            // alert('Successfully logged in');
+            console.log(data)
+            // setTimeout(5000);     
+            window.location = `/users/${data.user._id}`;
         } else {
-            alert(`Failed to login status code: ${response.status}`);
+            alert(`Failed to login\nPlease check that your credentials are correct and try again `);
+            window.location = '/';
         }
     };
 
@@ -33,12 +39,11 @@ const LoginPage = () => {
 
   return (
     <>
-    <Navbar />
     <WidgetWrapper>
         <form>
             <div>
                 <h1>Login</h1>
-                    <label for="email">Email: </label>
+                    <label htmlFor="email">Email: </label>
                     <input 
                         type = "email"
                         id = "email"
@@ -47,7 +52,7 @@ const LoginPage = () => {
                         autoComplete= "username"
                         onChange = {e => setEmail(e.target.value)} />
                     <section>
-                    <label for="password">Password: </label>
+                    <label htmlFor="password">Password: </label>
                     <input
                         type = "password"
                         id = "password"
