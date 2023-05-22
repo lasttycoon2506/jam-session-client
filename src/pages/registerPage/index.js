@@ -1,7 +1,5 @@
 import WidgetWrapper from "../../components/WidgetWrapper";
-import React, { useState, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import React, { useState} from "react";
 import {
   Button,
   Divider,
@@ -12,7 +10,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-// import { isEmail } from "validator";
+
 
 const initialRegisterData = {
   name: "",
@@ -28,9 +26,25 @@ const initialRegisterData = {
 };
 
 const RegisterPage = () => {
-  const dispatch = useDispatch();
   const [formData, setFormData] = useState(initialRegisterData);
   const API_URL = "https://jam-session.onrender.com/auth/register";
+
+  const isTooLong = (name) => name.length > 32;
+  
+  const isEmailValid = (email) =>{
+    if(email.length < 1) return true;
+    const emailRegex = new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/);
+    if (emailRegex.test(email)) return true;
+    else return false;
+  }
+  
+  const isPassValid = (pass) => {
+    if(pass.length < 1) return true;
+    const passRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/);
+    if (passRegex.test(pass)) return true;
+    else return false;
+
+  }
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -86,7 +100,6 @@ const RegisterPage = () => {
 
   return (
     <div>
-      {/* <WidgetWrapper>Register Now to Start Jamming</WidgetWrapper> */}
       <WidgetWrapper>
         <Typography variant="h5" align="center" mb={2}>
           Register to Jam Session
@@ -96,21 +109,22 @@ const RegisterPage = () => {
           <form onSubmit={register}>
             <Grid container spacing={2} mt={2}>
               <Grid item xs={12} sm={6}>
-                {/* *<label htmlFor="">Name</label> */}
                 <TextField
+                  required
                   type="text"
                   fullWidth
                   label="Name"
                   name="name"
                   placeholder="Rodrigo00"
                   value={formData.name}
+                  error={isTooLong(formData.name)}
+                  helperText={isTooLong(formData.name) ? "Name is not Valid, try less than 32 characters": ""}
                   onChange={handleInputChange}
-                  required
                   maxLength="32"
+                  
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                {/* *<label htmlFor="">Email</label> */}
                 <TextField
                   label="Email"
                   fullWidth
@@ -120,7 +134,8 @@ const RegisterPage = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                  error={!isEmailValid(formData.email)}
+                  helperText={!isEmailValid(formData.email) ? "Email is not valid": ""}
                   title="ex: newuser@jamsesh.com"
                 />
               </Grid>
@@ -136,8 +151,9 @@ const RegisterPage = () => {
                   required
                   min="8"
                   max="16"
-                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}"
-                  title="Must contain at least 1 numer, 1 upper case letter, 1 lowercase letter"
+                  error={!isPassValid(formData.password)}
+                  helperText={!isPassValid(formData.password) ? "Password is not valid, Must be 8-16 characters, contain at least one uppercase letter, one lowercase letter, one number and one special character": ""}
+                  title=" Must be 8-16 characters, contain at least one uppercase letter, one lowercase letter, one number and one special character"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -149,6 +165,8 @@ const RegisterPage = () => {
                   placeholder="Los Angeles, Ca"
                   value={formData.location}
                   onChange={handleInputChange}
+                  error={isTooLong(formData.location)}
+                  helperText={isTooLong(formData.location) ? "Location is not Valid, try less than 32 characters": ""}
                   required
                 />
               </Grid>
@@ -253,52 +271,6 @@ const RegisterPage = () => {
                 </Button>
               </Grid>
             </Grid>
-
-            {/* <div>
-              -- Primary Instrument(you can add more later) --
-              <div>
-                <label htmlFor="">Instrument Name</label>
-              </div>
-              <div>
-                <label htmlFor="">Years of Experice</label>
-                <select
-                  name="yearsExperience"
-                  type="text"
-                  placeholder="0"
-                  value={formData.yearsExperience}
-                  onChange={handleInputChange}
-                >
-                  <option value="0">0</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10+</option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="">Proficiency</label>
-                <select
-                  name="proficiency"
-                  type="text"
-                  placeholder=""
-                  value={formData.proficiency}
-                  onChange={handleInputChange}
-                >
-                  <option value="Novice">Novice</option>
-                  <option value="Intermediate">Intermediate</option>
-                  <option value="Advanced">Advanced</option>
-                  <option value="Expert">Expert</option>
-                </select>
-              </div>
-            </div> */}
-            {/* <button className="mt-3">Lets Jam!</button>
-            <div>* - required</div> */}
           </form>
         </div>
       </WidgetWrapper>
