@@ -83,12 +83,9 @@ const Form = () => {
             </Button>
           </Grid>
           <Grid item xs={12} align="center">
-            <Typography variant="h6" align="center" mb={1} color="primary">
-              Dont have an account? Register now
-            </Typography>
             <Button
               onClick={() => {
-                window.location = "/register";
+                window.location = "https://jam-session.onrender.com/auth/register";
               }}
               variant="outlined"
               color="primary"
