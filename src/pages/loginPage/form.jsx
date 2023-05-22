@@ -87,9 +87,10 @@ const Form = () => {
               onClick={() => {
                 window.location = "/register";
               }}
-              variant="outlined"
+              variant="contained"
               color="primary"
               size="large"
+              
             >
               Create Account
             </Button>
