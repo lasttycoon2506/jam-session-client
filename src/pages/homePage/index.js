@@ -1,12 +1,12 @@
-import WidgetWrapper from "../../components/WidgetWrapper";
+import Navbar from "../../widgets/Navbar";
+import Newsfeed from "../../widgets/Newsfeed";
 
 const HomePage = () => {
   return (
-    <>
-      <WidgetWrapper>
-        <div>Homepage</div>
-      </WidgetWrapper>
-    </>
+    <div>
+      <Navbar />
+      <Newsfeed />
+    </div>
   );
 };
 export default HomePage;

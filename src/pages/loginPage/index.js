@@ -1,10 +1,14 @@
 import WidgetWrapper from "../../components/WidgetWrapper";
+import Navbar from "../../widgets/Navbar";
 
 const LoginPage = () => {
   return (
-    <WidgetWrapper>
-      <div>Login Page</div>
-    </WidgetWrapper>
+    <>
+      <Navbar />
+      <WidgetWrapper>
+        <div>Login Page</div>
+      </WidgetWrapper>
+    </>
   );
 };
 export default LoginPage;

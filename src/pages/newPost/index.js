@@ -1,10 +1,12 @@
-import WidgetWrapper from "../../components/WidgetWrapper";
+import Navbar from "../../widgets/Navbar";
+import Form from "./form";
 
 const NewPostPage = () => {
   return (
-    <WidgetWrapper>
-      <div>New Post Page</div>
-    </WidgetWrapper>
+    <>
+      <Navbar />
+      <Form />
+    </>
   );
 };
 export default NewPostPage;
