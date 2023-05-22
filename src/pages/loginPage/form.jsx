@@ -63,6 +63,7 @@ const Form = () => {
               label="Email"
               name="email"
               type="email"
+              required
               value={formData.email}
               onChange={handleInputChange}
             />
@@ -73,6 +74,7 @@ const Form = () => {
               label="Password"
               name="password"
               type="password"
+              required
               value={formData.password}
               onChange={handleInputChange}
             />
