@@ -85,7 +85,7 @@ const Form = () => {
           <Grid item xs={12} align="center">
             <Button
               onClick={() => {
-                window.location = "https://jam-session.onrender.com/auth/register";
+                window.location = "/register";
               }}
               variant="outlined"
               color="primary"
