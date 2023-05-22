@@ -1,12 +1,6 @@
 import WidgetWrapper from "../../components/WidgetWrapper";
 import React, { useState } from "react";
-import {
-    TextField,
-    Button,
-    Grid,
-    Typography,
-    Divider,
-  } from "@mui/material";
+import { TextField, Button, Grid, Typography, Divider } from "@mui/material";
 
 const initialLoginData = {
   email: "",
@@ -15,7 +9,7 @@ const initialLoginData = {
 
 const Form = () => {
   const [formData, setFormData] = useState(initialLoginData);
-  const API_URL = "https://jam-session.onrender.com/auth/login"; 
+  const API_URL = "https://jam-session.onrender.com/auth/login";
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -46,19 +40,19 @@ const Form = () => {
       }
       const responseData = await response.json();
       console.log(responseData.user);
-      window.alert("Logging in...")
-      window.location = '/home';
+      window.alert("Logging in...");
+      window.location = "/home";
     } catch (error) {
       console.error("Error with POST request:", error);
       alert("Incorrect Login Information");
-      window.location = '/';
+      window.location = "/";
     }
   };
 
   return (
     <WidgetWrapper>
       <Typography variant="h5" align="center" mb={1}>
-        Login
+        Sign on to Jam Session
       </Typography>
       <Divider />
       <form onSubmit={loginAttempt}>
@@ -83,9 +77,24 @@ const Form = () => {
               onChange={handleInputChange}
             />
           </Grid>
-          <Grid item xs={12}>
-            <Button type="submit" variant="contained" color="primary">
-              Submit
+          <Grid item xs={12} align="center">
+            <Button type="submit" variant="contained" color="primary" size="large">
+              Log In
+            </Button>
+          </Grid>
+          <Grid item xs={12} align="center">
+            <Typography variant="h6" align="center" mb={1} color="primary">
+              Dont have an account? Register now
+            </Typography>
+            <Button
+              onClick={() => {
+                window.location = "/register";
+              }}
+              variant="outlined"
+              color="primary"
+              size="large"
+            >
+              Create Account
             </Button>
           </Grid>
         </Grid>
