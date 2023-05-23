@@ -35,7 +35,10 @@ export const rootSlice = createSlice({
     setProfile: (state, action) => {
       state.profile = action.payload.profile;
     },
-    setRegistration: () => {}
+    setRegistration: () => {},
+    setUser: (state, action) => {
+      state.user = action.payload.user;
+    }
   },
 });
 
