@@ -14,34 +14,36 @@ import {
 import WidgetWrapper from "../../components/WidgetWrapper";
 import { useSelector } from "react-redux";
 import Autocomplete from "@mui/material/Autocomplete";
+import { useNavigate } from "react-router-dom";
 
 const initialFormData = {
   userId: "",
   type: "",
   instrument: "",
   experience: "",
-  genres: "",
+  genres: [],
   availability: "",
   recordingExperience: "",
   description: "",
-  images: [],
+  imagePath: "",
 };
 
 const Form = () => {
+  const navigate = useNavigate();
   const userId = useSelector((state) => state.user._id);
+  const token = useSelector((state) => state.token);
   const tempUserId = "64664dc135ead82c97713735";
   const [formData, setFormData] = useState(initialFormData);
-  const localUrl = `http://localhost:3001/posts/${tempUserId}`;
-  const url =
+  const localUrl = `http://localhost:3001/posts`;
+  const proxyUrl =
     "https://corsproxy.io/?" +
     encodeURIComponent(`https://jam-session.onrender.com/posts/${tempUserId}`);
+
+  let url = localUrl;
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     let newValue = value;
-    if (name === "genres") {
-      newValue = Array.isArray(value) ? value.join(", ") : value;
-    }
     setFormData({
       ...formData,
       [name]: newValue,
@@ -50,46 +52,48 @@ const Form = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const form = {
-      type: formData.type,
-      instrument: formData.instrument,
-      experience: formData.experience,
-      genres: formData.genres,
-      availability: formData.availability,
-      recordingExperience: formData.recordingExperience,
-      description: formData.description,
-      images: formData.images,
-    };
+    const form = new FormData();
+    form.append("userId", tempUserId);
+    form.append("type", formData.type);
+    form.append("instrument", formData.instrument);
+    form.append("experience", formData.experience);
+    form.append("genres", formData.genres);
+    form.append("availability", formData.availability);
+    form.append("recordingExperience", formData.recordingExperience);
+    form.append("description", formData.description);
+    if (formData.image) {
+      form.append("image", formData.image);
+      form.append("imagePath", formData.image.name);
+    }
+
     try {
-      console.log(form);
       const response = await fetch(url, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
+        headers: { Authorization: token },
+        body: form,
       });
       const data = await response.json();
       console.log(data);
+      navigate("/home");
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleImageUpload = (event) => {
-    const files = event.target.files;
-    const imagesArray = [];
-    for (let i = 0; i < files.length; i++) {
-      const reader = new FileReader();
-      reader.readAsDataURL(files[i]);
-      reader.onloadend = () => {
-        imagesArray.push(reader.result);
-        setFormData({
-          ...formData,
-          images: imagesArray,
-        });
-      };
-    }
+    const file = event.target.files[0];
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      image: file,
+    }));
+  };
+
+  const handleGenreChange = (event, values) => {
+    const selectedGenres = values.map((option) => option.trim());
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      genres: selectedGenres,
+    }));
   };
 
   return (
@@ -160,14 +164,10 @@ const Form = () => {
                 "World",
                 "Other",
               ]}
+              value={formData.genres}
+              onChange={handleGenreChange}
               renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Genres"
-                  name="genres"
-                  value={formData.genres}
-                  onChange={handleInputChange}
-                />
+                <TextField {...params} label="Genres" name="genres" />
               )}
             />
           </Grid>
@@ -202,7 +202,13 @@ const Form = () => {
           </Grid>
           <Grid item xs={12}>
             <InputLabel>Upload Images</InputLabel>
-            <Input type="file" accept="image/*" onChange={handleImageUpload} />
+            <Input
+              name="image"
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleImageUpload}
+            />
           </Grid>
           <Grid item xs={12}>
             <Button type="submit" variant="contained" color="primary">

@@ -41,12 +41,13 @@ const PostWidget = ({ post }) => {
         <Typography variant="body2" component="p">
           {post.description}
         </Typography>
-        {post.imagePaths && post.imagePaths.length > 0 && (
-          <div>
-            {post.imagePaths.map((image, index) => (
-              <img src={image} alt={image} key={index} />
-            ))}
-          </div>
+        {post.imagePath && (
+          <img
+            width="100%"
+            alt="post"
+            style={{ marginTop: "1rem" }}
+            src={`http://jam-session.onrender.com/assets/${post.imagePath}`}
+          />
         )}
       </Box>
     </WidgetWrapper>
