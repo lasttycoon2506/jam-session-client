@@ -9,6 +9,7 @@ const initialState = {
     location: "",
     intruments: {},
     genre: "",
+    
   },
   profile: {},
   posts: [],
@@ -23,6 +24,7 @@ export const rootSlice = createSlice({
     setLogin: (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
+      console.log(state.user);
     },
     setLogout: (state) => {
       state.user = null;

@@ -1,6 +1,9 @@
 import WidgetWrapper from "../../components/WidgetWrapper";
 import React, { useState } from "react";
 import { TextField, Button, Grid, Typography, Divider } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { setLogin } from "../../state";
+
 
 const initialLoginData = {
   email: "",
@@ -8,8 +11,9 @@ const initialLoginData = {
 };
 
 const Form = () => {
+  const dispatch = useDispatch(); 
   const [formData, setFormData] = useState(initialLoginData);
-  const API_URL = "https://jam-session.onrender.com/auth/login";
+  const URL = "https://jam-session.onrender.com/auth/login";
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -27,8 +31,7 @@ const Form = () => {
       password: formData.password,
     };
     try {
-      console.log(login);
-      const response = await fetch(API_URL, {
+      const response = await fetch(URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,16 +41,17 @@ const Form = () => {
       if (!response.ok) {
         throw new Error(`POST request failed with status ${response.status}`);
       }
-      const responseData = await response.json();
-      console.log(responseData.user);
+      const data = await response.json();
+      dispatch(setLogin({ user: data.user, token: data.token}));
       window.alert("Logging in...");
-      window.location = "/home";
+      window.location = "/edit";
     } catch (error) {
       console.error("Error with POST request:", error);
       alert("Incorrect Login Information");
       window.location = "/";
     }
   };
+
 
   return (
     <WidgetWrapper>
@@ -63,6 +67,7 @@ const Form = () => {
               label="Email"
               name="email"
               type="email"
+              required
               value={formData.email}
               onChange={handleInputChange}
             />
@@ -73,24 +78,25 @@ const Form = () => {
               label="Password"
               name="password"
               type="password"
+              required
               value={formData.password}
               onChange={handleInputChange}
             />
           </Grid>
-          <Grid item xs={12} align="center">
+          <Grid item xs={12} align="center" mb={3}>
             <Button type="submit" variant="contained" color="primary" size="large">
               Log In
             </Button>
           </Grid>
           <Grid item xs={12} align="center">
-            <Typography variant="h6" align="center" mb={1} color="primary">
-              Dont have an account? Register now
+            <Typography variant="h6" mb={1} color="primary">
+              Dont have an account?
             </Typography>
             <Button
               onClick={() => {
                 window.location = "/register";
               }}
-              variant="outlined"
+              variant="contained"
               color="primary"
               size="large"
             >

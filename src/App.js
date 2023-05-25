@@ -7,7 +7,8 @@ import HomePage from "./pages/homePage";
 import LoginPage from "./pages/loginPage";
 import ProfilePage from "./pages/profilePage";
 import RegisterPage from "./pages/registerPage";
-import NewPostPage from "./pages/newPost/index.js";
+import NewPostPage from "./pages/newPostPage/index.js";
+import EditUserPage from "./pages/editUserPage";
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -24,6 +25,7 @@ function App() {
             <Route path="/profile/:userId" element={<ProfilePage />}></Route>
             <Route path="/register" element={<RegisterPage />}></Route>
             <Route path="/create" element={<NewPostPage />}></Route>
+            <Route path="/edit" element={<EditUserPage />}></Route>
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
