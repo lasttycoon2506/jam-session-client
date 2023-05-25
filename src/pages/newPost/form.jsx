@@ -39,7 +39,7 @@ const Form = () => {
     "https://corsproxy.io/?" +
     encodeURIComponent(`https://jam-session.onrender.com/posts/${tempUserId}`);
 
-  let url = localUrl;
+  let url = proxyUrl;
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
