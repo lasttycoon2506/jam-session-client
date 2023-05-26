@@ -24,7 +24,6 @@ export const rootSlice = createSlice({
     setLogin: (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
-      console.log(state.user);
     },
     setLogout: (state) => {
       state.user = null;
@@ -32,7 +31,6 @@ export const rootSlice = createSlice({
     },
     setPosts: (state, action) => {
       state.posts = action.payload.posts;
-      console.log(action.payload.posts);
     },
     setProfile: (state, action) => {
       state.profile = action.payload.profile;
