@@ -7,9 +7,10 @@ const initialState = {
     password: "",
     name: "",
     location: "",
-    intruments: {},
-    genre: "",
-    
+    instruments: {},
+    genres: "",
+    availability: "",
+    experience: ""
   },
   profile: {},
   posts: [],
@@ -42,6 +43,6 @@ export const rootSlice = createSlice({
   },
 });
 
-export const { setLogin, setLogout, setPosts, setProfile, setRegistration } = rootSlice.actions;
+export const { setLogin, setLogout, setPosts, setProfile, setRegistration, setUser } = rootSlice.actions;
 
 export default rootSlice.reducer;
