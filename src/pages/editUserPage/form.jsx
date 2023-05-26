@@ -1,6 +1,8 @@
 import WidgetWrapper from "../../components/WidgetWrapper";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../state";
+
 import {
   Button,
   Divider,
@@ -12,27 +14,13 @@ import {
   Typography,
 } from "@mui/material";
 
-
-const initialFormData = {
-  name: "",
-  email: "",
-  password: "",
-  location: "",
-  bandExperience: "",
-  genres: "",
-  availability: "",
-  instrumentName: "",
-  yearsExperience: "",
-  proficiency: "",
-};
-
-const EditUserPage = () => {
+const Form = () => {
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user); 
-  console.log(userState);
-  const [formData, setFormData] = useState(initialFormData);
-  const id = 87537598
-  const URL = `https://jam-session.onrender.com/:${id}`;
+  const { instrumentName, yearsExperience, proficiency } = userState.instruments;
+  const [formData, setFormData] = useState(userState);
+  const id = "64667bf65d2fe20b62476dae";
+  const URL = `https://jam-session.onrender.com/users/${id}`;
 
   const isTooLong = (name) => name.length > 32;
   
@@ -50,19 +38,6 @@ const EditUserPage = () => {
     else return false;
   }
 
-  const fillForm = () => {
-    const { name, value } = userState.name;
-    let newValue = value;
-    setFormData({
-      ...formData,
-      [name]: newValue,
-    });
-  };
-
-  // useEffect(() => {
-  //   console.log(userState); // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);   
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     let newValue = value;
@@ -72,46 +47,45 @@ const EditUserPage = () => {
     });
   };
 
-  const register = async (event) => {
+  const edit = async (event) => {
     event.preventDefault();
 
-    //Build instruments json object
     const instruments = {
       instrumentName: formData.instrumentName,
       yearsExperience: formData.yearsExperience,
       proficiency: formData.proficiency,
     };
 
-    const newUser = {
+    const editUser = {
       name: formData.name,
       email: formData.email,
       password: formData.password,
       location: formData.location,
-      bandExperience: formData.bandExperience,
+      experience: formData.experience,
       genres: formData.genres,
       availability: formData.availability,
       instruments: instruments,
     };
 
     try {
-      console.log(newUser);
       const response = await fetch(URL, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newUser),
+        body: JSON.stringify(editUser),
       });
 
       if (!response.ok) {
-        throw new Error(`POST request failed with status ${response.status}`);
+        throw new Error(`PUT request failed with status ${response.status}`);
       }
-      const responseData = await response.json();
-      console.log("POST request successful");
-      console.log(responseData);
-      window.location = `/`;
+      const data = await response.json();
+      console.log(data.user);
+      // dispatch(setUser({ user: data}));
+      window.alert("Profile Edited!");
+      console.log("PUT request successful");
     } catch (error) {
-      console.error("Error with POST request:", error);
+      console.error("Error with PUT request:", error);
     }
   };
 
@@ -119,11 +93,11 @@ const EditUserPage = () => {
     <div>
       <WidgetWrapper>
         <Typography variant="h5" align="center" mb={2}>
-          Edit Your Jam Session User Account
+          Edit Your Profile
         </Typography>
         <Divider />
         <div className="registerForm">
-          <form onSubmit={register}>
+          <form onSubmit={edit}>
             <Grid container spacing={2} mt={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -191,9 +165,9 @@ const EditUserPage = () => {
                   fullWidth
                   label="Band Experience"
                   type="text"
-                  name="bandExperience"
+                  name="experience"
                   placeholder="3 Years"
-                  value={formData.bandExperience}
+                  value={formData.experience}
                   onChange={handleInputChange}
                 />
               </Grid>
@@ -204,7 +178,7 @@ const EditUserPage = () => {
                   type="text"
                   name="genres"
                   placeholder="Heavy Metal, Slowcore, City Pop"
-                  value={formData.type}
+                  value={formData.genres}
                   onChange={handleInputChange}
                 />
               </Grid>
@@ -222,7 +196,7 @@ const EditUserPage = () => {
             </Grid>
             <Grid>
               <Typography variant="h6" align="center" mb={1} mt={3}>
-                Primary Instrument - you can add more later
+                Primary Instrument
               </Typography>
 
               <Grid item xs={12} sm={6}>
@@ -278,12 +252,9 @@ const EditUserPage = () => {
                   <MenuItem value="Expert">Expert</MenuItem>
                 </Select>
               </Grid>
-              <Typography variant="h6" align="left" mb={1} mt={3}>
-                * - Required to register
-              </Typography>
               <Grid item xs={12} align="center" mt={4}>
                 <Button type="submit" variant="contained" color="primary">
-                  Register
+                  Edit
                 </Button>
               </Grid>
             </Grid>
@@ -293,4 +264,4 @@ const EditUserPage = () => {
     </div>
   );
 };
-export default EditUserPage;
+export default Form;
