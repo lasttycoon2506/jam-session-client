@@ -90,9 +90,6 @@ const Form = () => {
             </Button>
           </Grid>
           <Grid item xs={12} align="center">
-            <Typography variant="h6" mb={1} color="primary">
-              Dont have an account?
-            </Typography>
             <Button
               onClick={() => {
                 window.location = "/register";
