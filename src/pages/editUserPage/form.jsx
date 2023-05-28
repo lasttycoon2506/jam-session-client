@@ -17,8 +17,21 @@ import {
 const Form = () => {
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user); 
+  // unpacking instruments object 
   const { instrumentName, yearsExperience, proficiency } = userState.instruments;
-  const [formData, setFormData] = useState(userState);
+  const [formData, setFormData] = useState({
+    email: userState.email,
+    password: userState.password,
+    name: userState.name,
+    location: userState.location,
+    instrumentName: instrumentName,
+    yearsExperience: yearsExperience,
+    proficiency: proficiency,
+    genres: userState.genres,
+    availability: userState.availability,
+    experience: userState.experience
+  });
+  
   const id = "64667bf65d2fe20b62476dae";
   const URL = `https://jam-session.onrender.com/users/${id}`;
 
