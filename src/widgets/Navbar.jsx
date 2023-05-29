@@ -16,15 +16,17 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Logout from "@mui/icons-material/Logout";
 import { AddCircleOutline } from "@mui/icons-material";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const theme = useTheme();
   const light = theme.palette.neutral.light;
   const dark = theme.palette.primary.dark;
   const medium = theme.palette.primary.medium;
   const shadow = theme.palette.neutral.dark;
-  const userId = "24"; // temporary
+  const userId =   user._id;
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 

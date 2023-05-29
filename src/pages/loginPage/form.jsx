@@ -1,6 +1,9 @@
 import WidgetWrapper from "../../components/WidgetWrapper";
 import React, { useState } from "react";
 import { TextField, Button, Grid, Typography, Divider } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { setLogin } from "../../state";
+import { useDispatch } from "react-redux";
 
 const initialLoginData = {
   email: "",
@@ -10,6 +13,8 @@ const initialLoginData = {
 const Form = () => {
   const [formData, setFormData] = useState(initialLoginData);
   const API_URL = "https://jam-session.onrender.com/auth/login";
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -38,10 +43,11 @@ const Form = () => {
       if (!response.ok) {
         throw new Error(`POST request failed with status ${response.status}`);
       }
-      const responseData = await response.json();
-      console.log(responseData.user);
+      const data = await response.json();
+      console.log(data.user);
+      dispatch(setLogin({ user: data.user, token: data.token}));
       window.alert("Logging in...");
-      window.location = "/home";
+      navigate("/home");
     } catch (error) {
       console.error("Error with POST request:", error);
       alert("Incorrect Login Information");

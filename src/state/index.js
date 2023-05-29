@@ -42,6 +42,6 @@ export const rootSlice = createSlice({
   },
 });
 
-export const { setLogin, setLogout, setPosts, setProfile, setRegistration } = rootSlice.actions;
+export const { setLogin, setLogout, setPosts, setProfile, setRegistration, setUser } = rootSlice.actions;
 
 export default rootSlice.reducer;
