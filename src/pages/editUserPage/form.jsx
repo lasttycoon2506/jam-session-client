@@ -18,8 +18,10 @@ const Form = () => {
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user);
   // unpacking instruments object 
-  const { instrumentName, yearsExperience, proficiency } = userState.instruments[0];
+  console.log(userState.instruments);
 
+  const { instrumentName, yearsExperience, proficiency } = userState.instruments[0];
+console.log(proficiency);
   const [formData, setFormData] = useState({
     email: userState.email,
     password: "",
@@ -94,8 +96,7 @@ const Form = () => {
         throw new Error(`PUT request failed with status ${response.status}`);
       }
       const data = await response.json();
-      console.log(data.user);
-      // dispatch(setUser({ user: data}));
+      dispatch(setUser({ user: editUser }));
       window.alert("Profile Edited!");
       console.log("PUT request successful");
     } catch (error) {
@@ -132,7 +133,7 @@ const Form = () => {
                 <TextField
                   label="Email"
                   fullWidth
-                  type="text"
+                  type="email"
                   placeholder="email@jam.sesh"
                   name="email"
                   value={formData.email}
@@ -147,7 +148,7 @@ const Form = () => {
                 <TextField
                   label="New Password"
                   fullWidth
-                  type="text"
+                  type="password"
                   name="password"
                   placeholder="8-16 Characters"
                   value={formData.password}
@@ -177,7 +178,7 @@ const Form = () => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  label="Band Experience"
+                  label="Experience"
                   type="text"
                   name="experience"
                   placeholder="3 Years"
