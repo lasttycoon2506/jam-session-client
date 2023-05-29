@@ -2,6 +2,7 @@ import WidgetWrapper from "../../components/WidgetWrapper";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../state";
+import { useNavigate } from "react-router-dom";
 
 import {
   Button,
@@ -16,26 +17,22 @@ import {
 
 const Form = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userState = useSelector((state) => state.user);
-  // unpacking instruments object 
-  console.log(userState.instruments);
-
-  const { instrumentName, yearsExperience, proficiency } = userState.instruments[0];
-console.log(proficiency);
   const [formData, setFormData] = useState({
     email: userState.email,
     password: "",
     name: userState.name,
     location: userState.location,
-    instrumentName: instrumentName,
-    yearsExperience: yearsExperience,
-    proficiency: proficiency,
+    instrumentName: "",
+    yearsExperience: "",
+    proficiency: "",
     genres: userState.genres,
     availability: userState.availability,
-    experience: userState.experience
+    bandExperience: userState.bandExperience
   });
   
-  const id = "64667bf65d2fe20b62476dae";
+  const id = userState._id;
   const URL = `https://jam-session.onrender.com/users/${id}`;
 
   const isTooLong = (name) => name.length > 32;
@@ -62,7 +59,6 @@ console.log(proficiency);
       [name]: newValue,
     });
   };
-
   const edit = async (event) => {
     event.preventDefault();
 
@@ -71,13 +67,13 @@ console.log(proficiency);
       yearsExperience: formData.yearsExperience,
       proficiency: formData.proficiency,
     };
-
+  
     const editUser = {
       name: formData.name,
       email: formData.email,
       password: formData.password,
       location: formData.location,
-      experience: formData.experience,
+      bandExperience: formData.bandExperience,
       genres: formData.genres,
       availability: formData.availability,
       instruments: instruments,
@@ -99,6 +95,7 @@ console.log(proficiency);
       dispatch(setUser({ user: editUser }));
       window.alert("Profile Edited!");
       console.log("PUT request successful");
+      navigate("/home");
     } catch (error) {
       console.error("Error with PUT request:", error);
     }
@@ -153,7 +150,6 @@ console.log(proficiency);
                   placeholder="8-16 Characters"
                   value={formData.password}
                   onChange={handleInputChange}
-                  required
                   min="8"
                   max="16"
                   error={!isPassValid(formData.password)}
@@ -178,11 +174,11 @@ console.log(proficiency);
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  label="Experience"
+                  label="Band Experience"
                   type="text"
-                  name="experience"
+                  name="bandExperience"
                   placeholder="3 Years"
-                  value={formData.experience}
+                  value={formData.bandExperience}
                   onChange={handleInputChange}
                 />
               </Grid>
@@ -232,7 +228,7 @@ console.log(proficiency);
                   label="Years of Experience"
                   name="yearsExperience"
                   type="text"
-                  placeholder="0"
+                  placeholder=""
                   value={formData.yearsExperience}
                   onChange={handleInputChange}
                 >
