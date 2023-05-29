@@ -69,6 +69,7 @@ const Form = () => {
               label="Email"
               name="email"
               type="email"
+              required
               value={formData.email}
               onChange={handleInputChange}
             />
@@ -79,6 +80,7 @@ const Form = () => {
               label="Password"
               name="password"
               type="password"
+              required
               value={formData.password}
               onChange={handleInputChange}
             />
@@ -89,14 +91,11 @@ const Form = () => {
             </Button>
           </Grid>
           <Grid item xs={12} align="center">
-            <Typography variant="h6" align="center" mb={1} color="primary">
-              Dont have an account? Register now
-            </Typography>
             <Button
               onClick={() => {
                 window.location = "/register";
               }}
-              variant="outlined"
+              variant="contained"
               color="primary"
               size="large"
             >
