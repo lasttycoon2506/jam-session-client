@@ -128,7 +128,7 @@ const RegisterPage = () => {
                 <TextField
                   label="Email"
                   fullWidth
-                  type="text"
+                  type="email"
                   placeholder="email@jam.sesh"
                   name="email"
                   value={formData.email}
@@ -143,7 +143,7 @@ const RegisterPage = () => {
                 <TextField
                   label="Password"
                   fullWidth
-                  type="text"
+                  type="password"
                   name="password"
                   placeholder="8-16 Characters"
                   value={formData.password}
