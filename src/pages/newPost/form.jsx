@@ -31,10 +31,10 @@ const Form = () => {
   const userId = useSelector((state) => state.user._id);
   const tempUserId = "64664dc135ead82c97713735";
   const [formData, setFormData] = useState(initialFormData);
-  const localUrl = `http://localhost:3001/posts/${tempUserId}`;
+  const localUrl = `http://localhost:3001/posts/${userId}`;
   const url =
     "https://corsproxy.io/?" +
-    encodeURIComponent(`https://jam-session.onrender.com/posts/${tempUserId}`);
+    encodeURIComponent(`https://jam-session.onrender.com/posts/${userId}`);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;

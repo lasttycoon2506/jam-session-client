@@ -35,10 +35,13 @@ export const rootSlice = createSlice({
     setProfile: (state, action) => {
       state.profile = action.payload.profile;
     },
-    setRegistration: () => {}
+    setRegistration: () => {},
+    setUser: (state, action) => {
+      state.user = action.payload.user;
+    }
   },
 });
 
-export const { setLogin, setLogout, setPosts, setProfile, setRegistration } = rootSlice.actions;
+export const { setLogin, setLogout, setPosts, setProfile, setRegistration, setUser } = rootSlice.actions;
 
 export default rootSlice.reducer;
