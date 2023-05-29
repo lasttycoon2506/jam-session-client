@@ -16,12 +16,13 @@ import {
 
 const Form = () => {
   const dispatch = useDispatch();
-  const userState = useSelector((state) => state.user); 
+  const userState = useSelector((state) => state.user);
   // unpacking instruments object 
-  const { instrumentName, yearsExperience, proficiency } = userState.instruments;
+  const { instrumentName, yearsExperience, proficiency } = userState.instruments[0];
+
   const [formData, setFormData] = useState({
     email: userState.email,
-    password: userState.password,
+    password: "",
     name: userState.name,
     location: userState.location,
     instrumentName: instrumentName,
@@ -144,7 +145,7 @@ const Form = () => {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  label="Password"
+                  label="New Password"
                   fullWidth
                   type="text"
                   name="password"
