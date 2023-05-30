@@ -1,10 +1,35 @@
 import WidgetWrapper from "../../components/WidgetWrapper";
-import Navbar from "../../widgets/Navbar";
-import Form from "./form.jsx"
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../state";
+import { useNavigate } from "react-router-dom";
 
-const RegisterPage = () => {
-  const [formData, setFormData] = useState(initialRegisterData);
-  const API_URL = "https://jam-session.onrender.com/auth/register";
+import {
+  Button,
+  Divider,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
+
+const Form = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userState = useSelector((state) => state.user);
+  const [formData, setFormData] = useState({
+    email: userState.email,
+    name: userState.name,
+    location: userState.location,
+    genres: userState.genres,
+    availability: userState.availability,
+    bandExperience: userState.bandExperience
+  });
+  
+  const id = userState._id;
+  const URL = `https://jam-session.onrender.com/users/${id}`;
 
   const isTooLong = (name) => name.length > 32;
   
@@ -13,14 +38,6 @@ const RegisterPage = () => {
     const emailRegex = new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/);
     if (emailRegex.test(email)) return true;
     else return false;
-  }
-  
-  const isPassValid = (pass) => {
-    if(pass.length < 1) return true;
-    const passRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/);
-    if (passRegex.test(pass)) return true;
-    else return false;
-
   }
 
   const handleInputChange = (event) => {
@@ -31,21 +48,18 @@ const RegisterPage = () => {
       [name]: newValue,
     });
   };
-
-  const register = async (event) => {
+  const edit = async (event) => {
     event.preventDefault();
 
-    //Build instruments json object
     const instruments = {
       instrumentName: formData.instrumentName,
       yearsExperience: formData.yearsExperience,
       proficiency: formData.proficiency,
     };
-
-    const newUser = {
+  
+    const editUser = {
       name: formData.name,
       email: formData.email,
-      password: formData.password,
       location: formData.location,
       bandExperience: formData.bandExperience,
       genres: formData.genres,
@@ -54,25 +68,24 @@ const RegisterPage = () => {
     };
 
     try {
-      console.log(newUser);
-      const response = await fetch(API_URL, {
-        method: "POST",
+      const response = await fetch(URL, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newUser),
+        body: JSON.stringify(editUser),
       });
 
       if (!response.ok) {
-        throw new Error(`POST request failed with status ${response.status}`);
+        throw new Error(`PUT request failed with status ${response.status}`);
       }
-      const responseData = await response.json();
-      console.log("POST request successful");
-      console.log(responseData);
-      window.alert("You have been registered, Jam On!");
-      window.location = `/`;
+      const data = await response.json();
+      dispatch(setUser({ user: editUser }));
+      window.alert("Profile Edited!");
+      console.log("PUT request successful");
+      navigate("/home");
     } catch (error) {
-      console.error("Error with POST request:", error);
+      console.error("Error with PUT request:", error);
     }
   };
 
@@ -80,11 +93,11 @@ const RegisterPage = () => {
     <div>
       <WidgetWrapper>
         <Typography variant="h5" align="center" mb={2}>
-          Register to Jam Session
+          Edit Your Profile
         </Typography>
         <Divider />
         <div className="registerForm">
-          <form onSubmit={register}>
+          <form onSubmit={edit}>
             <Grid container spacing={2} mt={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -99,7 +112,6 @@ const RegisterPage = () => {
                   helperText={isTooLong(formData.name) ? "Name is not Valid, try less than 32 characters": ""}
                   onChange={handleInputChange}
                   maxLength="32"
-                  
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -115,23 +127,6 @@ const RegisterPage = () => {
                   error={!isEmailValid(formData.email)}
                   helperText={!isEmailValid(formData.email) ? "Email is not valid": ""}
                   title="ex: newuser@jamsesh.com"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Password"
-                  fullWidth
-                  type="password"
-                  name="password"
-                  placeholder="8-16 Characters"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  required
-                  min="8"
-                  max="16"
-                  error={!isPassValid(formData.password)}
-                  helperText={!isPassValid(formData.password) ? "Password is not valid, Must be 8-16 characters, contain at least one uppercase letter, one lowercase letter, one number and one special character": ""}
-                  title=" Must be 8-16 characters, contain at least one uppercase letter, one lowercase letter, one number and one special character"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -166,7 +161,7 @@ const RegisterPage = () => {
                   type="text"
                   name="genres"
                   placeholder="Heavy Metal, Slowcore, City Pop"
-                  value={formData.type}
+                  value={formData.genres}
                   onChange={handleInputChange}
                 />
               </Grid>
@@ -184,7 +179,7 @@ const RegisterPage = () => {
             </Grid>
             <Grid>
               <Typography variant="h6" align="center" mb={1} mt={3}>
-                Primary Instrument - you can add more later
+                New Primary Instrument
               </Typography>
 
               <Grid item xs={12} sm={6}>
@@ -205,7 +200,7 @@ const RegisterPage = () => {
                   label="Years of Experience"
                   name="yearsExperience"
                   type="text"
-                  placeholder="0"
+                  placeholder=""
                   value={formData.yearsExperience}
                   onChange={handleInputChange}
                 >
@@ -240,12 +235,9 @@ const RegisterPage = () => {
                   <MenuItem value="Expert">Expert</MenuItem>
                 </Select>
               </Grid>
-              <Typography variant="h6" align="left" mb={1} mt={3}>
-                * - Required to register
-              </Typography>
               <Grid item xs={12} align="center" mt={4}>
                 <Button type="submit" variant="contained" color="primary">
-                  Register
+                  Edit
                 </Button>
               </Grid>
             </Grid>
@@ -255,4 +247,4 @@ const RegisterPage = () => {
     </div>
   );
 };
-export default RegisterPage;
+export default Form;
