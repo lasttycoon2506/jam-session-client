@@ -7,8 +7,10 @@ const initialState = {
     password: "",
     name: "",
     location: "",
-    intruments: {},
-    genre: "",
+    instruments: {},
+    genres: "",
+    availability: "",
+    experience: ""
   },
   profile: {},
   posts: [],
@@ -30,7 +32,6 @@ export const rootSlice = createSlice({
     },
     setPosts: (state, action) => {
       state.posts = action.payload.posts;
-      console.log(action.payload.posts);
     },
     setProfile: (state, action) => {
       state.profile = action.payload.profile;

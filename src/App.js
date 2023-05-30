@@ -7,7 +7,8 @@ import HomePage from "./pages/homePage";
 import LoginPage from "./pages/loginPage";
 import ProfilePage from "./pages/profilePage";
 import RegisterPage from "./pages/registerPage";
-import NewPostPage from "./pages/newPost/index.js";
+import NewPostPage from "./pages/newPostPage/index.js";
+import EditUserPage from "./pages/editUserPage";
 
 function App() {
   const theme = useMemo(() => createTheme(themeSettings()), []);

@@ -11,10 +11,10 @@ const initialLoginData = {
 };
 
 const Form = () => {
-  const [formData, setFormData] = useState(initialLoginData);
-  const API_URL = "https://jam-session.onrender.com/auth/login";
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
+  const [formData, setFormData] = useState(initialLoginData);
+  const URL = "https://jam-session.onrender.com/auth/login";
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -32,8 +32,7 @@ const Form = () => {
       password: formData.password,
     };
     try {
-      console.log(login);
-      const response = await fetch(API_URL, {
+      const response = await fetch(URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,16 +43,16 @@ const Form = () => {
         throw new Error(`POST request failed with status ${response.status}`);
       }
       const data = await response.json();
-      console.log(data.user);
       dispatch(setLogin({ user: data.user, token: data.token}));
       window.alert("Logging in...");
-      navigate("/home");
+      navigate("/home")
     } catch (error) {
       console.error("Error with POST request:", error);
       alert("Incorrect Login Information");
-      window.location = "/";
+      navigate("/")
     }
   };
+
 
   return (
     <WidgetWrapper>
@@ -85,7 +84,7 @@ const Form = () => {
               onChange={handleInputChange}
             />
           </Grid>
-          <Grid item xs={12} align="center">
+          <Grid item xs={12} align="center" mb={3}>
             <Button type="submit" variant="contained" color="primary" size="large">
               Log In
             </Button>
