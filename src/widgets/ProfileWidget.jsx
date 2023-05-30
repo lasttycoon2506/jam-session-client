@@ -66,7 +66,7 @@ const ProfileWidget = () => {
             variant="contained"
             color="primary"
             size="small"
-            onClick={() => navigate("/home")} //TODO: replace with edit route when merged.
+            onClick={() => navigate("/profile/edit")} //TODO: replace with edit route when merged.
           >
             Edit
           </Button>

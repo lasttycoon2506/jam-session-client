@@ -42,6 +42,10 @@ function App() {
               path="/profile/"
               element={token ? <ProfilePage /> : <Navigate to="/login" />}
             />
+            <Route
+              path="/profile/edit"
+              element={token ? <EditUserPage /> : <Navigate to="/login" />}
+            />
             <Route path="/register" element={<RegisterPage />} />
             <Route
               path="/create"
