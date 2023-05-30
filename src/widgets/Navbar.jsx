@@ -16,17 +16,19 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Logout from "@mui/icons-material/Logout";
 import { AddCircleOutline } from "@mui/icons-material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setLogout } from "../state";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const theme = useTheme();
   const light = theme.palette.neutral.light;
   const dark = theme.palette.primary.dark;
   const medium = theme.palette.primary.medium;
   const shadow = theme.palette.neutral.dark;
-  const userId =   user._id;
+  const userId = user ? user._id : null;
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -106,7 +108,11 @@ const Navbar = () => {
           </ListItem>
           <ListItem
             key="logout"
-            onClick={toggleDrawer}
+            onClick={() => {
+              dispatch(setLogout());
+              toggleDrawer();
+              navigate("/login");
+            }}
             sx={{
               "&:hover": {
                 cursor: "pointer",

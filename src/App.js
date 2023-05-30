@@ -38,6 +38,10 @@ function App() {
               path="/profile/:userId"
               element={token ? <ProfilePage /> : <Navigate to="/login" />}
             />
+            <Route
+              path="/profile/"
+              element={token ? <ProfilePage /> : <Navigate to="/login" />}
+            />
             <Route path="/register" element={<RegisterPage />} />
             <Route
               path="/create"
