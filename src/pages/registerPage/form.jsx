@@ -1,8 +1,31 @@
 import WidgetWrapper from "../../components/WidgetWrapper";
-import Navbar from "../../widgets/Navbar";
-import Form from "./form.jsx"
+import React, { useState} from "react";
+import {
+  Button,
+  Divider,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 
-const RegisterPage = () => {
+
+const initialRegisterData = {
+  name: "",
+  email: "",
+  password: "",
+  location: "",
+  bandExperience: "",
+  genres: "",
+  availability: "",
+  instrumentName: "",
+  yearsExperience: "",
+  proficiency: "",
+};
+
+const Form = () => {
   const [formData, setFormData] = useState(initialRegisterData);
   const API_URL = "https://jam-session.onrender.com/auth/register";
 
@@ -36,11 +59,11 @@ const RegisterPage = () => {
     event.preventDefault();
 
     //Build instruments json object
-    const instruments = {
+    const instruments = [{
       instrumentName: formData.instrumentName,
       yearsExperience: formData.yearsExperience,
       proficiency: formData.proficiency,
-    };
+    }];
 
     const newUser = {
       name: formData.name,
@@ -69,7 +92,6 @@ const RegisterPage = () => {
       const responseData = await response.json();
       console.log("POST request successful");
       console.log(responseData);
-      window.alert("You have been registered, Jam On!");
       window.location = `/`;
     } catch (error) {
       console.error("Error with POST request:", error);
@@ -106,7 +128,7 @@ const RegisterPage = () => {
                 <TextField
                   label="Email"
                   fullWidth
-                  type="email"
+                  type="text"
                   placeholder="email@jam.sesh"
                   name="email"
                   value={formData.email}
@@ -121,7 +143,7 @@ const RegisterPage = () => {
                 <TextField
                   label="Password"
                   fullWidth
-                  type="password"
+                  type="text"
                   name="password"
                   placeholder="8-16 Characters"
                   value={formData.password}
@@ -255,4 +277,4 @@ const RegisterPage = () => {
     </div>
   );
 };
-export default RegisterPage;
+export default Form;

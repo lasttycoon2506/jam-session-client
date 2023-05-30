@@ -1,9 +1,9 @@
 import WidgetWrapper from "../../components/WidgetWrapper";
 import React, { useState } from "react";
 import { TextField, Button, Grid, Typography, Divider } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { setLogin } from "../../state";
 import { useNavigate } from "react-router-dom";
+import { setLogin } from "../../state";
+import { useDispatch } from "react-redux";
 
 const initialLoginData = {
   email: "",
@@ -45,7 +45,7 @@ const Form = () => {
       const data = await response.json();
       dispatch(setLogin({ user: data.user, token: data.token}));
       window.alert("Logging in...");
-      navigate("/edit")
+      navigate("/home")
     } catch (error) {
       console.error("Error with POST request:", error);
       alert("Incorrect Login Information");

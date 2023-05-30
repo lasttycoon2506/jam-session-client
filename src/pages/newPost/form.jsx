@@ -37,7 +37,7 @@ const Form = () => {
   const localUrl = `http://localhost:3001/posts`;
   const proxyUrl =
     "https://corsproxy.io/?" +
-    encodeURIComponent(`https://jam-session.onrender.com/posts/${tempUserId}`);
+    encodeURIComponent(`https://jam-session.onrender.com/posts/${userId}`);
 
   let url = proxyUrl;
 
