@@ -29,7 +29,7 @@ const PostWidget = ({ post }) => {
         </Typography>
         <Divider />
         <Typography color="textSecondary">
-          Genres: {post.genres.join(", ")}
+          Genres: {post.genres && post.genres.join(", ")}
         </Typography>
         <Typography color="textSecondary">
           Availability: {post.availability}
