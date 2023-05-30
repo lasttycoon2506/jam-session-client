@@ -32,13 +32,7 @@ const Form = () => {
   const navigate = useNavigate();
   const userId = useSelector((state) => state.user._id);
   const token = useSelector((state) => state.token);
-  const tempUserId = "64664dc135ead82c97713735";
   const [formData, setFormData] = useState(initialFormData);
-  const localUrl = `http://localhost:3001/posts`;
-  const proxyUrl =
-    "https://corsproxy.io/?" +
-    encodeURIComponent(`https://jam-session.onrender.com/posts/${tempUserId}`);
-
   let url = 'https://jam-session.onrender.com/posts/';
 
   const handleInputChange = (event) => {
