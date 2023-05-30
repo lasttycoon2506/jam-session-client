@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useMemo } from "react";
 import { themeSettings } from "./theme.js";
 import { useSelector } from "react-redux";
@@ -10,8 +10,8 @@ import RegisterPage from "./pages/registerPage";
 import NewPostPage from "./pages/newPost/index.js";
 
 function App() {
-  const mode = useSelector((state) => state.mode);
-  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  const theme = useMemo(() => createTheme(themeSettings()), []);
+  const token = useSelector((state) => state.token);
 
   return (
     <div className="app">
@@ -19,11 +19,29 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
-            <Route path="/" element={<LoginPage />}></Route>
-            <Route path="/home" element={<HomePage />}></Route>
-            <Route path="/profile/:userId" element={<ProfilePage />}></Route>
-            <Route path="/register" element={<RegisterPage />}></Route>
-            <Route path="/create" element={<NewPostPage />}></Route>
+            <Route
+              path="/"
+              element={
+                token ? <Navigate to="/home" /> : <Navigate to="/login" />
+              }
+            />
+            <Route
+              path="login"
+              element={token ? <Navigate to="/home" /> : <LoginPage />}
+            />
+            <Route
+              path="/home"
+              element={token ? <HomePage /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/profile/:userId"
+              element={token ? <ProfilePage /> : <Navigate to="/login" />}
+            />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route
+              path="/create"
+              element={token ? <NewPostPage /> : <Navigate to="/login" />}
+            />
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
