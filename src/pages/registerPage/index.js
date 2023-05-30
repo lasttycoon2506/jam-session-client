@@ -92,6 +92,7 @@ const RegisterPage = () => {
       const responseData = await response.json();
       console.log("POST request successful");
       console.log(responseData);
+      window.alert("You have been registered, Jam On!");
       window.location = `/`;
     } catch (error) {
       console.error("Error with POST request:", error);
