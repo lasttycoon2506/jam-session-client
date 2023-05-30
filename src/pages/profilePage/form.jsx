@@ -3,7 +3,6 @@ import React from "react";
 import { Typography, Divider, useMediaQuery, Box } from "@mui/material";
 import ProfileWidget from "../../widgets/ProfileWidget";
 import Newsfeed from "../../widgets/Newsfeed";
-import { useTheme } from "@emotion/react";
 
 const Form = () => {
   const isMobileScreen = useMediaQuery("(max-width: 600px)");
