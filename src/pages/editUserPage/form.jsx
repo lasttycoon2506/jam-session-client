@@ -21,12 +21,8 @@ const Form = () => {
   const userState = useSelector((state) => state.user);
   const [formData, setFormData] = useState({
     email: userState.email,
-    password: "",
     name: userState.name,
     location: userState.location,
-    instrumentName: "",
-    yearsExperience: "",
-    proficiency: "",
     genres: userState.genres,
     availability: userState.availability,
     bandExperience: userState.bandExperience
@@ -41,13 +37,6 @@ const Form = () => {
     if(email.length < 1) return true;
     const emailRegex = new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/);
     if (emailRegex.test(email)) return true;
-    else return false;
-  }
-  
-  const isPassValid = (pass) => {
-    if(pass.length < 1) return true;
-    const passRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/);
-    if (passRegex.test(pass)) return true;
     else return false;
   }
 
@@ -71,7 +60,6 @@ const Form = () => {
     const editUser = {
       name: formData.name,
       email: formData.email,
-      password: formData.password,
       location: formData.location,
       bandExperience: formData.bandExperience,
       genres: formData.genres,
@@ -143,22 +131,6 @@ const Form = () => {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  label="New Password"
-                  fullWidth
-                  type="password"
-                  name="password"
-                  placeholder="8-16 Characters"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  min="8"
-                  max="16"
-                  error={!isPassValid(formData.password)}
-                  helperText={!isPassValid(formData.password) ? "Password is not valid, Must be 8-16 characters, contain at least one uppercase letter, one lowercase letter, one number and one special character": ""}
-                  title=" Must be 8-16 characters, contain at least one uppercase letter, one lowercase letter, one number and one special character"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
                   fullWidth
                   label="Location"
                   type="text"
@@ -207,7 +179,7 @@ const Form = () => {
             </Grid>
             <Grid>
               <Typography variant="h6" align="center" mb={1} mt={3}>
-                Primary Instrument
+                New Primary Instrument
               </Typography>
 
               <Grid item xs={12} sm={6}>
