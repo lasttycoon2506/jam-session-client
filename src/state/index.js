@@ -12,7 +12,7 @@ const initialState = {
     availability: "",
     experience: "",
   },
-  profile: { user: {} },
+  profile: { instruments: [] },
   posts: [],
   token: "",
 };
