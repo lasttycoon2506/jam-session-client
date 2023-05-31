@@ -25,20 +25,22 @@ const Form = () => {
     location: userState.location,
     genres: userState.genres,
     availability: userState.availability,
-    bandExperience: userState.bandExperience
+    bandExperience: userState.bandExperience,
   });
-  
+
   const id = userState._id;
   const URL = `https://jam-session.onrender.com/users/${id}`;
 
   const isTooLong = (name) => name.length > 32;
-  
-  const isEmailValid = (email) =>{
-    if(email.length < 1) return true;
-    const emailRegex = new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/);
+
+  const isEmailValid = (email) => {
+    if (email.length < 1) return true;
+    const emailRegex = new RegExp(
+      /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
+    );
     if (emailRegex.test(email)) return true;
     else return false;
-  }
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -56,7 +58,7 @@ const Form = () => {
       yearsExperience: formData.yearsExperience,
       proficiency: formData.proficiency,
     };
-  
+
     const editUser = {
       name: formData.name,
       email: formData.email,
@@ -79,7 +81,6 @@ const Form = () => {
       if (!response.ok) {
         throw new Error(`PUT request failed with status ${response.status}`);
       }
-      const data = await response.json();
       dispatch(setUser({ user: editUser }));
       window.alert("Profile Edited!");
       console.log("PUT request successful");
@@ -109,7 +110,11 @@ const Form = () => {
                   placeholder="Rodrigo00"
                   value={formData.name}
                   error={isTooLong(formData.name)}
-                  helperText={isTooLong(formData.name) ? "Name is not Valid, try less than 32 characters": ""}
+                  helperText={
+                    isTooLong(formData.name)
+                      ? "Name is not Valid, try less than 32 characters"
+                      : ""
+                  }
                   onChange={handleInputChange}
                   maxLength="32"
                 />
@@ -125,7 +130,9 @@ const Form = () => {
                   onChange={handleInputChange}
                   required
                   error={!isEmailValid(formData.email)}
-                  helperText={!isEmailValid(formData.email) ? "Email is not valid": ""}
+                  helperText={
+                    !isEmailValid(formData.email) ? "Email is not valid" : ""
+                  }
                   title="ex: newuser@jamsesh.com"
                 />
               </Grid>
@@ -139,7 +146,11 @@ const Form = () => {
                   value={formData.location}
                   onChange={handleInputChange}
                   error={isTooLong(formData.location)}
-                  helperText={isTooLong(formData.location) ? "Location is not Valid, try less than 32 characters": ""}
+                  helperText={
+                    isTooLong(formData.location)
+                      ? "Location is not Valid, try less than 32 characters"
+                      : ""
+                  }
                   required
                 />
               </Grid>
