@@ -108,11 +108,13 @@ const ProfileWidget = ({ id }) => {
               type="submit"
               variant="contained"
               color="primary"
-              onClick={
-                () => (isOwnProfile ? navigate("/create") : navigate("/home")) //*TODO: replace home with DM route when relevant
+              onClick={() =>
+                isOwnProfile
+                  ? navigate("/create")
+                  : window.location.href(`mailto:${profile.email}`)
               }
             >
-              {isOwnProfile ? "New Post" : "Direct Message"}
+              {isOwnProfile ? "New Post" : "Send Email"}
             </Button>
           </Grid>
         </Grid>
