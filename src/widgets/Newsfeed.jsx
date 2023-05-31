@@ -3,6 +3,8 @@ import PostWidget from "./PostWidget";
 import { useEffect } from "react";
 import { setPosts } from "../state";
 import { useParams } from "react-router-dom";
+import { Typography } from "@mui/material";
+import WidgetWrapper from "../components/WidgetWrapper";
 
 const Newsfeed = () => {
   const dispatch = useDispatch(); // used to store values in state (see below)
@@ -21,21 +23,25 @@ const Newsfeed = () => {
         Authorization: token,
       },
     })
-      .then((response) => response.json())                  // 1. parse data
-      .then((data) => dispatch(setPosts({ posts: data })))  // 2. store data in state
-      .catch((error) => console.error(error));              // 3. error logging
+      .then((response) => response.json()) // 1. parse data
+      .then((data) => dispatch(setPosts({ posts: data }))) // 2. store data in state
+      .catch((error) => console.error(error)); // 3. error logging
   };
 
   // Run getPosts on page load
   useEffect(() => {
     getPosts(); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);       // ^ this just disables an unecessary linting error
+  }, []); // ^ this just disables an unecessary linting error
 
   return (
     <div>
-      {posts.map((post) => (
-        <PostWidget key={post._id} post={post} />
-      ))}
+      {posts ? (
+        posts.map((post) => <PostWidget key={post._id} post={post} />)
+      ) : (
+        <WidgetWrapper>
+          <Typography>Loading posts...</Typography>
+        </WidgetWrapper>
+      )}
     </div>
   );
 };
