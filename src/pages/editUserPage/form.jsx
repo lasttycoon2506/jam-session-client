@@ -75,7 +75,7 @@ const Form = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: token;
+          Authorization: token,
         },
         body: JSON.stringify(editUser),
       });
