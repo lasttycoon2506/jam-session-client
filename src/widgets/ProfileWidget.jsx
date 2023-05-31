@@ -5,21 +5,40 @@ import {
   useMediaQuery,
   Button,
 } from "@mui/material";
-import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import WidgetWrapper from "../components/WidgetWrapper";
+import { setProfile } from "../state";
+import { useEffect } from "react";
 
-const ProfileWidget = () => {
-  const user = useSelector((state) => state.user);
+const ProfileWidget = ({ id }) => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.profile);
+  const token = useSelector((state) => state.token);
   const isMobileScreen = useMediaQuery("(max-width: 600px)");
   const navigate = useNavigate();
-  const paramId = useParams();
   const allInstruments = user.instruments;
   let isOwnProfile = false;
-  console.log(user);
 
   // Designate wheter this is own profile or others
-  if (user._id === paramId.userId) isOwnProfile = true;
+  if (user._id === id) isOwnProfile = true;
+
+  const getProfile = async () => {
+    fetch(`https://jam-session.onrender.com/users/${id}`, {
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(setProfile({ profile: data }));
+      })
+      .catch((error) => console.error(error));
+  };
+
+  useEffect(() => {
+    getProfile(); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const renderAllInstruments = () => {
     return (
@@ -78,7 +97,7 @@ const ProfileWidget = () => {
       <Typography>Genres: {user.genres}</Typography>
       <Typography>Availability: {user.availability}</Typography>
       <Typography>Band Experience: {user.bandExperience}</Typography>
-      <Typography>{renderAllInstruments()}</Typography>
+      {renderAllInstruments()}
       <Grid>
         <Grid item xs={12} align="center" mt={4}>
           <Button

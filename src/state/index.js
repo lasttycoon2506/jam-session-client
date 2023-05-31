@@ -10,9 +10,9 @@ const initialState = {
     instruments: {},
     genres: "",
     availability: "",
-    experience: ""
+    experience: "",
   },
-  profile: {},
+  profile: { user: {} },
   posts: [],
   token: "",
 };
@@ -39,10 +39,17 @@ export const rootSlice = createSlice({
     setRegistration: () => {},
     setUser: (state, action) => {
       state.user = action.payload.user;
-    }
+    },
   },
 });
 
-export const { setLogin, setLogout, setPosts, setProfile, setRegistration, setUser } = rootSlice.actions;
+export const {
+  setLogin,
+  setLogout,
+  setPosts,
+  setProfile,
+  setRegistration,
+  setUser,
+} = rootSlice.actions;
 
 export default rootSlice.reducer;
