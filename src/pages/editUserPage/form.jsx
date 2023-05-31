@@ -19,6 +19,7 @@ const Form = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userState = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
   const [formData, setFormData] = useState({
     email: userState.email,
     name: userState.name,
@@ -74,6 +75,7 @@ const Form = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: token;
         },
         body: JSON.stringify(editUser),
       });
