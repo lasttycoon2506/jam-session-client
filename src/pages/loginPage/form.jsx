@@ -42,9 +42,9 @@ const Form = () => {
       if (!response.ok) {
         throw new Error(`POST request failed with status ${response.status}`);
       }
+      window.alert("Logging in, please wait...");
       const data = await response.json();
       dispatch(setLogin({ user: data.user, token: data.token}));
-      window.alert("Logging in...");
       navigate("/home")
     } catch (error) {
       console.error("Error with POST request:", error);
