@@ -22,7 +22,7 @@ const PostWidget = ({ post }) => {
         }}
       >
         <Typography variant="h5" component="h2">
-          {post.type === "offering" ? "Musician Offering:" : "Musician Wanted:"}
+          {post.type === "Offering" ? "Musician Offering:" : "Musician Wanted:"}
         </Typography>
         <Typography color="textSecondary" variant="h6">
           {post.instrument} player with {post.experience} experience
