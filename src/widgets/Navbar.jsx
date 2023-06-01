@@ -15,7 +15,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Logout from "@mui/icons-material/Logout";
-import { AddCircleOutline } from "@mui/icons-material";
+import { AddCircleOutline, Lyrics } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../state";
 
@@ -56,6 +56,7 @@ const Navbar = () => {
           >
             <MenuIcon />
           </IconButton>
+          <Lyrics />
           <Typography
             variant="h4"
             color={medium}
