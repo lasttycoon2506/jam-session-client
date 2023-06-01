@@ -7,6 +7,18 @@ import { useNavigate } from "react-router-dom";
 const PostWidget = ({ post }) => {
   const isMobileScreen = useMediaQuery("(max-width: 600px)");
   const navigate = useNavigate();
+
+  // Text reformatting
+  const capitalizeText = (text) => {
+    return text.replace(/\b\w/g, function (match) {
+      return match.toUpperCase();
+    });
+  };
+  post.instrument = capitalizeText(post.instrument);
+  post.experience = capitalizeText(post.experience);
+  post.availability = capitalizeText(post.availability);
+  post.recordingExperience = capitalizeText(post.recordingExperience);
+
   return post ? (
     <WidgetWrapper>
       <Box
