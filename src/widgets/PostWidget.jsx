@@ -56,7 +56,7 @@ const PostWidget = ({ post }) => {
         {post.imagePath && (
           <img
             width="100%"
-            alt="post"
+            alt={`${post.imagePath}`}
             style={{ marginTop: "1rem" }}
             src={`http://jam-session.onrender.com/assets/${post.imagePath}`}
           />
