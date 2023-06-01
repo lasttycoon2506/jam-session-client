@@ -14,10 +14,10 @@ const PostWidget = ({ post }) => {
       return match.toUpperCase();
     });
   };
-  post.instrument = capitalizeText(post.instrument);
-  post.experience = capitalizeText(post.experience);
-  post.availability = capitalizeText(post.availability);
-  post.recordingExperience = capitalizeText(post.recordingExperience);
+  const instrument = capitalizeText(post.instrument);
+  const experience = capitalizeText(post.experience);
+  const availability = capitalizeText(post.availability);
+  const recordingExperience = capitalizeText(post.recordingExperience);
 
   return post ? (
     <WidgetWrapper>
@@ -37,17 +37,17 @@ const PostWidget = ({ post }) => {
           {post.type === "Offering" ? "Musician Offering:" : "Musician Wanted:"}
         </Typography>
         <Typography color="textSecondary" variant="h6">
-          {post.instrument} player with {post.experience} experience
+          {instrument} Player with {experience} experience
         </Typography>
         <Divider />
         <Typography color="textSecondary">
           Genres: {post.genres && post.genres.join(", ")}
         </Typography>
         <Typography color="textSecondary">
-          Availability: {post.availability}
+          Availability: {availability}
         </Typography>
         <Typography color="textSecondary">
-          Recording Experience: {post.recordingExperience}
+          Recording Experience: {recordingExperience}
         </Typography>
         <Divider />
         <Typography variant="body2" component="p">
