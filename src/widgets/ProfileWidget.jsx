@@ -111,7 +111,7 @@ const ProfileWidget = ({ id }) => {
               onClick={() =>
                 isOwnProfile
                   ? navigate("/create")
-                  : window.location.href(`mailto:${profile.email}`)
+                  : window.location.assign(`mailto:${profile.email}`)
               }
             >
               {isOwnProfile ? "New Post" : "Send Email"}
