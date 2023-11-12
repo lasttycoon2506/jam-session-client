@@ -37,4 +37,7 @@ Site allows a musician to create (and edit) a user profile, log-in (with authent
 ![Screenshot 2023-11-12 174936](https://github.com/lasttycoon2506/jam-session-client/assets/114425878/9571e865-4d31-4fc1-936b-e55828c31ae9)
 
 ### Edit Profile
-1) Click on Menu Icon at top left of screen and click My Profile, then click EDIT 
+1) Click on Menu Icon at top left of screen and click My Profile, then click EDIT
+
+### View All Your Posts
+1) Follow above steps for Edit Profile, scrolling down to find all Your Posts
