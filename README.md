@@ -28,5 +28,6 @@ Site allows a musician to create (and edit) a user profile, log-in (with authent
 ### Log In
 1) From https://jam-session-osu.netlify.app/login enter email/password for previously created account and click LOG IN
 
-
+### View All Musicians' Posts
+1) Go to https://jam-session-osu.netlify.app/home (once logged in as a user)
 
