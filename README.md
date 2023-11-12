@@ -32,8 +32,9 @@ Site allows a musician to create (and edit) a user profile, log-in (with authent
 1) Go to https://jam-session-osu.netlify.app/home (once logged in as a user)
 
 ### Create New Post
-1) Click on Menu Icon on top left of screen and click New Post:
+1) Click on Menu Icon at top left of screen and click New Post:
    
 ![Screenshot 2023-11-12 174936](https://github.com/lasttycoon2506/jam-session-client/assets/114425878/9571e865-4d31-4fc1-936b-e55828c31ae9)
 
-
+### Edit Profile
+1) Click on Menu Icon at top left of screen and click My Profile, then click EDIT 
