@@ -1,7 +1,10 @@
-# jam-session-client
+# Jam-Session-Client
+Front-end for a site for musicians looking to form a band using React & Node
 
-## Installation
+## Introduction
+Site allows a musician to create a profile,
 
+## Installation 
 Install Jam Session Client with npm
 
 ```bash
