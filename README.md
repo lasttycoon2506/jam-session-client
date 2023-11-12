@@ -8,8 +8,8 @@ Site allows a musician to create a user profile, logging in (with authentication
 Install Jam Session Client with npm
 
 ```bash
-  git clone https://github.com/lasttycoon2506/jam-session-client-group.git 
-  cd jam-session-client-group
+  git clone https://github.com/lasttycoon2506/jam-session-client.git
+  cd jam-session-client
   npm install
   npm start
 ```
