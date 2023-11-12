@@ -6,7 +6,7 @@ Site allows a musician to create (and edit) a user profile, log-in (with authent
 
 ## Installation 
 1) Download and install Node.js
-2) Follow the below steps to install client:
+2) Below, type the following into the CLI to install client:
 ```bash
   git clone https://github.com/lasttycoon2506/jam-session-client.git
   cd jam-session-client
