@@ -26,7 +26,7 @@ Site allows a musician to create (and edit) a user profile, log-in (with authent
 ![Screenshot 2023-11-12 174132](https://github.com/lasttycoon2506/jam-session-client/assets/114425878/da968bcd-2ad1-4a6c-b149-a77d19f1504d)
 
 ### Log In
-1) From https://jam-session-osu.netlify.app/login enter email/password for previously created account and click LOGIN
+1) From https://jam-session-osu.netlify.app/login enter email/password for previously created account and click LOG IN
 
 
 
