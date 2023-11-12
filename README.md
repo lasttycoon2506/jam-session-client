@@ -41,3 +41,6 @@ Site allows a musician to create (and edit) a user profile, log-in (with authent
 
 ### View All Your Posts
 1) Follow above steps for Edit Profile, scrolling down to find all Your Posts
+
+### Logout
+!) Click on Menu Icon at top left of screen and click Logout
