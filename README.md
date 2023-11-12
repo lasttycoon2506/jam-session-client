@@ -22,7 +22,10 @@ Site allows a musician to create (and edit) a user profile, log-in (with authent
 
 3) Fill in information and click REGISTER at bottom of page:
 
-   ![Screenshot 2023-11-12 173607](https://github.com/lasttycoon2506/jam-session-client/assets/114425878/fa3ec805-73ca-48ba-a74f-57ddb113d700)
+  
+![Screenshot 2023-11-12 174132](https://github.com/lasttycoon2506/jam-session-client/assets/114425878/da968bcd-2ad1-4a6c-b149-a77d19f1504d)
+
+
 
 
 
