@@ -13,9 +13,9 @@ Site allows a musician to create (and edit) a user profile, log-in (with authent
   npm install
 ```
 ### To Run
-1) Navigate to directory jam-session-client
-2) Into CLI type:
+Into CLI type:
    ```
+   cd jam-session-client
    npm start
    ```
 ## How-To
