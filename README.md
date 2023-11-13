@@ -11,8 +11,13 @@ Site allows a musician to create (and edit) a user profile, log-in (with authent
   git clone https://github.com/lasttycoon2506/jam-session-client.git
   cd jam-session-client
   npm install
-  npm start
 ```
+### To Run
+1) Navigate to directory jam-session-client
+2) Into CLI type:
+   ```
+   npm start
+   ```
 ## How-To
 ### Create Account
 1) Go to https://jam-session-osu.netlify.app/login
