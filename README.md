@@ -20,7 +20,7 @@ Into CLI type:
    ```
 ## How-To
 ### Create Account
-1) Go to https://jam-session-osu.netlify.app/login (to take advantage of MongoDB Atlas) otherwise if run locally (with above "To Run" instructions, client isn't connected to a server with DB access)
+1) Go to https://jam-session-osu.netlify.app/login (client connected to server to showcase features listed below)
 2) CREATE ACCOUNT bottom of page:
    
    ![Screenshot 2023-11-12 173256](https://github.com/lasttycoon2506/jam-session-client/assets/114425878/86ef9a74-ed7a-49da-b696-fcaac7f3efa8)
