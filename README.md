@@ -1,5 +1,5 @@
 # Jam-Session-Client
-Front-end for a site for musicians looking to form a band using React & Node
+Front-end for a site for musicians looking to form a band using React & Node (group)
 
 ## Introduction
 Site allows a musician to create (and edit) a user profile, log-in (with authentication) to post relevant instrument info and also search for other musicians through their posts. 
